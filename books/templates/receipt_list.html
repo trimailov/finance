@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+Hello, {{ user.username }}
+
+{% for receipt in receipts %}
+  {{ receipt }}
+{% endfor %}
+{% endblock %}

@@ -9,5 +9,5 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^table/', include('table.urls')),
+    url(r'^books/', include('books.urls')),
 ]
