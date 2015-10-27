@@ -10,8 +10,12 @@ pip:
 
 .PHONY: run
 run:
-	env/bin/python finance/manage.py runserver 0.0.0.0:8080
+	env/bin/python manage.py runserver 0.0.0.0:8080
 
 .PHONY: migrate
 migrate:
-	env/bin/python finance/manage.py migrate
+	env/bin/python manage.py migrate
+
+.PHONY: clean_cache
+clean_cache:
+	find **/__pycache__ -delete

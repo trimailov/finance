@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
     'table',
 )
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'finance.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['finance/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
