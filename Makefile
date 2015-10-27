@@ -19,3 +19,7 @@ migrate:
 .PHONY: clean_cache
 clean_cache:
 	find **/__pycache__ -delete
+
+.PHONY: tags
+tags:
+	ctags -R
