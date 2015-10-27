@@ -120,3 +120,8 @@ Session.vim
 
 ### Vagrant ###
 .vagrant/
+
+### exuberant ctags ###
+tags
+TAGS
+Tags
