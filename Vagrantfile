@@ -70,7 +70,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get update
     sudo apt-get install -y postgresql-9.3
     sudo -u postgres createdb finance
-    sudo -u postgres psql -c "CREATE USER vagrant;"
+    sudo -u postgres psql -c "CREATE USER vagrant CREATEDB;"
 
     sudo add-apt-repository ppa:fkrull/deadsnakes
     sudo apt-get update
