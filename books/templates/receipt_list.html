@@ -4,6 +4,9 @@
 Hello, {{ user.username }}
 
 {% for receipt in receipts %}
-  {{ receipt }}
+  <p>{{ receipt }}</p>
 {% endfor %}
+
+<a href="{% url 'receipt_create' user.id %}">Create new</a>
+
 {% endblock %}
