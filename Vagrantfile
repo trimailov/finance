@@ -77,5 +77,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get install -y python3.5
 
     sudo apt-get install -y build-essential python3-pip python3.5-venv python3-psycopg2 libpq-dev python3.5-dev
+
+    sudo apt-get install -y htop
   SHELL
 end
