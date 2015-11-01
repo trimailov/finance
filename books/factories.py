@@ -1,6 +1,6 @@
 import factory
 
-from accounts.factoies import UserFactory
+from accounts.factories import UserFactory
 from books import models
 
 
