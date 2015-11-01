@@ -9,7 +9,8 @@ from books import forms
 
 
 @login_required
-def receipt_list(request, user_id):
+def receipt_list(request):
+    user_id = request.user.id
     user = User.objects.get(id=user_id)
     ctx = {}
     ctx['user'] = user
@@ -18,13 +19,13 @@ def receipt_list(request, user_id):
 
 
 @login_required
-def receipt_create(request, user_id):
+def receipt_create(request):
     if request.method == "POST":
         form = forms.ReceiptForm(request.POST)
         if form.is_valid():
             form.instance.user = request.user
             form.save()
-            return redirect(reverse('receipt_list', args=[request.user.id]))
+            return redirect(reverse('receipt_list'))
     else:
         form = forms.ReceiptForm()
 
