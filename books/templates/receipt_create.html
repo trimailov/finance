@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "books_base.html" %}
 
-{% block content %}
+{% block books_content %}
 <form method="post">
   {% csrf_token %}
   {{ form }}

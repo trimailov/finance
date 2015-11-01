@@ -1,12 +1,12 @@
-{% extends "base.html" %}
+{% extends "books_base.html" %}
 
-{% block content %}
+{% block books_content %}
 Hello, {{ user.username }}
 
 {% for receipt in receipts %}
   <p>{{ receipt }}</p>
 {% endfor %}
 
-<a href="{% url 'receipt_create' user.id %}">Create new</a>
+<a href="{% url 'receipt_create' %}">Create new</a>
 
 {% endblock %}

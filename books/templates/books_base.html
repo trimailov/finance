@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% block user_controls %}
+<a href={% url "logout" %}?next={% url "home" %}>Logout</a>
+{% endblock %}
+
+{% block books_content %}
+{% endblock %}
+
+{% endblock %}
