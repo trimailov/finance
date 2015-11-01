@@ -1,2 +1,14 @@
+decorator==4.0.4
 Django==1.8.5
+factory-boy==2.6.0
+fake-factory==0.5.3
+ipdb==0.8.1
+ipython==4.0.0
+ipython-genutils==0.1.0
+path.py==8.1.2
+pexpect==4.0.1
+pickleshare==0.5
 psycopg2==2.6.1
+ptyprocess==0.5
+simplegeneric==0.8.1
+traitlets==4.0.0
