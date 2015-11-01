@@ -23,3 +23,11 @@ clean_cache:
 .PHONY: tags
 tags:
 	ctags -R
+
+.PHONY: test
+test:
+	env/bin/python manage.py test
+
+.PHONY: clean
+clean: clean_cache
+	rm -rf env tags
