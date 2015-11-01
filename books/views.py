@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.shortcuts import render
 
 from books import models
@@ -22,12 +22,9 @@ def receipt_create(request, user_id):
     if request.method == "POST":
         form = forms.ReceiptForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            models.Receipt.objects.create(title=data.get("title"),
-                                          price=data.get("price"),
-                                          user=request.user)
-            return HttpResponseRedirect(reverse('receipt_list',
-                                                args=[request.user.id]))
+            form.instance.user = request.user
+            form.save()
+            return redirect(reverse('receipt_list', args=[request.user.id]))
     else:
         form = forms.ReceiptForm()
 
