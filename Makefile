@@ -28,6 +28,12 @@ tags:
 test:
 	env/bin/python manage.py test
 
+.PHONY: coverage
+coverage:
+	env/bin/coverage run --source=finance,accounts,books manage.py test
+	env/bin/coverage report
+	env/bin/coverage html
+
 .PHONY: clean
 clean: clean_cache
 	rm -rf env tags
