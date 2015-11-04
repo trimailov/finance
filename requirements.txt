@@ -1,4 +1,5 @@
 coverage==4.0.1
+cssmin==0.2.0
 decorator==4.0.4
 Django==1.8.5
 django-pipeline==1.5.4
