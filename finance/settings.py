@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'accounts',
     'books',
+    'pipeline',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,10 +105,46 @@ USE_L10N = True
 USE_TZ = True
 
 
+# redirect after login
+LOGIN_REDIRECT_URL = reverse_lazy('accounts.views.login_redirect')
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR + '/var/www/static/'
 
-# redirect after login
-LOGIN_REDIRECT_URL = reverse_lazy('accounts.views.login_redirect')
+# needed for pipeline
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+STATICFILES_DIRS = (
+    BASE_DIR + '/finance/static/',
+)
+
+PIPELINE = True
+
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
+PIPELINE_CSSMIN_BINARY = BASE_DIR + '/env/bin//cssmin'
+
+PIPELINE_JS_COMPRESSOR = None
+
+# django-pipeline css settings
+PIPELINE_CSS = {
+    'finance': {
+        'source_filenames': (
+            'scss/bootstrap/bootstrap.scss',
+            'scss/main.scss',
+        ),
+        'output_filename': 'css/finance.css',
+    },
+}
+
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.sass.SASSCompiler',
+)
+
+PIPELINE_SASS_BINARY = BASE_DIR + '/env/bin/sassc'
