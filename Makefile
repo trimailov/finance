@@ -37,3 +37,7 @@ coverage:
 .PHONY: clean
 clean: clean_cache
 	rm -rf env tags
+
+.PHONY: static
+static:
+	env/bin/python manage.py collectstatic --noinput
