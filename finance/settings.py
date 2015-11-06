@@ -125,10 +125,12 @@ STATICFILES_DIRS = (
     BASE_DIR + '/finance/static/',
 )
 
+# always turn on pipeline
 PIPELINE = True
 
+# set compressor for css
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
-PIPELINE_CSSMIN_BINARY = BASE_DIR + '/env/bin//cssmin'
+PIPELINE_CSSMIN_BINARY = BASE_DIR + '/env/bin/cssmin'
 
 PIPELINE_JS_COMPRESSOR = None
 
@@ -136,10 +138,13 @@ PIPELINE_JS_COMPRESSOR = None
 PIPELINE_CSS = {
     'finance': {
         'source_filenames': (
-            'scss/bootstrap/bootstrap.scss',
+            'css/bootstrap.min.css',
             'scss/main.scss',
         ),
         'output_filename': 'css/finance.css',
+        'extra_context': {
+            'media': 'screen,projection,handheld',
+        },
     },
 }
 
