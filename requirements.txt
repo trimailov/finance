@@ -3,6 +3,7 @@ cssmin==0.2.0
 decorator==4.0.4
 Django==1.8.5
 django-pipeline==1.5.4
+django-widget-tweaks==1.4.1
 factory-boy==2.6.0
 fake-factory==0.5.3
 futures==3.0.3
