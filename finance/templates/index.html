@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'login' %}">Login</a>
+<div class="container">
+  <a class="btn btn-primary btn-block" href="{% url 'login' %}">Login</a>
+</div>
 {% endblock %}
