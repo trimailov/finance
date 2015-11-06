@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'accounts',
     'books',
     'pipeline',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
