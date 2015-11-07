@@ -3,23 +3,17 @@
 {% load render_field from widget_tweaks %}
 
 {% block content %}
-<div class="container">
-  <form class="form-login" method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+<form class="form-simple form-login" method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
 
-    <fieldset class="form-group">
-      {{ form.username.label_tag }}
-      {{ form.username.errors }}
-      {% render_field form.username class="form-control" %}
-    </fieldset>
+  {% for field in form %}
+  <fieldset class="form-group">
+    {{ field.label_tag }}
+    {% render_field field class="form-control" %}
+  </fieldset>
+  {% endfor %}
 
-    <fieldset class="form-group">
-      {{ form.password.label_tag }}
-      {% render_field form.password class="form-control" %}
-    </fieldset>
-
-    <button class="btn btn-primary btn-block" type="submit">Log in</button>
-  </form>
-</div>
+  <button class="btn btn-primary btn-block" type="submit">Log in</button>
+</form>
 {% endblock %}

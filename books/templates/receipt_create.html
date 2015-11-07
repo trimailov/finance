@@ -1,9 +1,20 @@
 {% extends "books_base.html" %}
 
+{% load render_field from widget_tweaks %}
+
 {% block books_content %}
-<form method="post">
+<form class="form-simple form-receipt-create" method="post">
   {% csrf_token %}
-  {{ form }}
-  <input type="submit" />
+  {{ form.non_field_errors }}
+
+  {% for field in form %}
+  <fieldset class="form-group">
+    {{ field.label_tag }}
+    <span class="text-danger">{{ field.errors }}</span>
+    {% render_field field class="form-control" %}
+  </fieldset>
+  {% endfor %}
+
+  <button class="btn btn-primary btn-block" type="submit">Create</button>
 </form>
 {% endblock %}

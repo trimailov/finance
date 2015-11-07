@@ -3,7 +3,11 @@
 {% block content %}
 
 {% block user_controls %}
-<a href={% url "logout" %}?next={% url "home" %}>Logout</a>
+<div class="row">
+  <div class="col-xs-12">
+    <a class="btn" href={% url "logout" %}?next={% url "home" %}>Logout</a>
+  </div>
+</div>
 {% endblock %}
 
 {% block books_content %}

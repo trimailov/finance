@@ -1,12 +1,29 @@
 {% extends "books_base.html" %}
 
 {% block books_content %}
-Hello, {{ user.username }}
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Hello, {{ user.username }}</h1>
+  </div>
+</div>
+
+<a class="btn btn-primary" href="{% url 'receipt_create' %}">New entry</a>
 
 {% for receipt in receipts %}
-  <p>{{ receipt }}</p>
+<div class="row receipt-list-entry">
+  <div class="col-xs-8">
+    {{ receipt.title }}
+  </div>
+  <div class="col-xs-4">
+    {% with receipt.price as price %}
+    {% if price >= 0 %}
+      <span class="text-success">€ {{ price }}</span>
+    {% else %}
+      <span class="text-danger">€ {{ price }}</span>
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
 {% endfor %}
-
-<a href="{% url 'receipt_create' %}">Create new</a>
 
 {% endblock %}
