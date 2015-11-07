@@ -41,3 +41,7 @@ clean: clean_cache
 .PHONY: static
 static:
 	env/bin/python manage.py collectstatic --noinput
+
+.PHONY: shell
+shell:
+	env/bin/python manage.py shell
