@@ -1,5 +1,5 @@
 sudo apt-get update
-sudo apt-get install -y postgresql-9.3
+sudo apt-get install -y postgresql-9.3 nginx
 sudo -u postgres createdb finance
 sudo -u postgres psql -c "CREATE USER justas CREATEDB;"
 
