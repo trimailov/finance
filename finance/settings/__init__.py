@@ -15,8 +15,10 @@ from django.core.urlresolvers import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# BASE_DIR (where manage.py is) is ine folder up, then settings dir
+BASE_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -113,7 +115,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('accounts.views.login_redirect')
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR + '/var/www/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'var/www/static/')
 
 # needed for pipeline
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
@@ -123,7 +125,7 @@ STATICFILES_FINDERS = (
     'pipeline.finders.PipelineFinder',
 )
 STATICFILES_DIRS = (
-    BASE_DIR + '/finance/static/',
+    os.path.join(BASE_DIR, 'finance/static/'),
 )
 
 # always turn on pipeline
@@ -131,9 +133,15 @@ PIPELINE = True
 
 # set compressor for css
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
-PIPELINE_CSSMIN_BINARY = BASE_DIR + '/env/bin/cssmin'
+PIPELINE_CSSMIN_BINARY = os.path.join(BASE_DIR, 'env/bin/cssmin')
 
 PIPELINE_JS_COMPRESSOR = None
+
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.sass.SASSCompiler',
+)
+
+PIPELINE_SASS_BINARY = os.path.join(BASE_DIR, 'env/bin/sassc')
 
 # django-pipeline css settings
 PIPELINE_CSS = {
@@ -148,9 +156,3 @@ PIPELINE_CSS = {
         },
     },
 }
-
-PIPELINE_COMPILERS = (
-  'pipeline.compilers.sass.SASSCompiler',
-)
-
-PIPELINE_SASS_BINARY = BASE_DIR + '/env/bin/sassc'
