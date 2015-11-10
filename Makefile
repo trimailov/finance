@@ -1,4 +1,4 @@
-all: env pip
+all: env pip env2 pip2
 
 .PHONY: env
 env:
@@ -7,6 +7,19 @@ env:
 .PHONY: pip
 pip:
 	env/bin/pip install -r requirements.txt
+
+.PHONY: env2
+env:
+	virtualenv env2
+
+.PHONY: pip2
+pip:
+	env2/bin/pip install -r requirements2.txt
+
+.PHONY: freeze
+pip:
+	env/bin/pip freeze > requirements.txt
+	env2/bin/pip freeze > requirements2.txt
 
 .PHONY: run
 run:
