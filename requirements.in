@@ -1,0 +1,6 @@
+Django
+django-pipeline
+django-widget-tweaks
+gunicorn
+libsass
+psycopg2
