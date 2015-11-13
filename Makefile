@@ -1,4 +1,5 @@
-all: env pip env2 pip2
+all: env pip
+dev: env dev-pip
 
 .PHONY: env
 env:
@@ -6,20 +7,14 @@ env:
 
 .PHONY: pip
 pip:
-	env/bin/pip install -r requirements.txt
+	env/bin/pip-compile requirements.in
+	env/bin/pip-sync requirements.txt
 
-.PHONY: env2
-env:
-	virtualenv env2
-
-.PHONY: pip2
-pip:
-	env2/bin/pip install -r requirements2.txt
-
-.PHONY: freeze
-pip:
-	env/bin/pip freeze > requirements.txt
-	env2/bin/pip freeze > requirements2.txt
+.PHONY: dev-pip
+dev-pip:
+	env/bin/pip-compile requirements.in
+	env/bin/pip-compile dev-requirements.in
+	env/bin/pip-sync requirements.txt dev-requirements.txt
 
 .PHONY: run
 run:
