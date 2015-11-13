@@ -2,8 +2,53 @@
 - hosts: all
   sudo: yes
 
+  vars:
+    name: finance
+    home: /opt/{{ name }}
+    path: "{{ home }}/app"
+
   tasks:
 
-  # apt-get update
+  # apt-get update (if 24h passed since last time)
   - name: apt update
-    apt: update_cache=yes
+    apt: update_cache=yes cache_valid_time=86400
+
+  - name: add repositories
+    apt_repository: repo="ppa:fkrull/deadsnakes" state=present
+
+  - name: apt packages
+    apt: pkg={{ item }} state=latest
+    with_items:
+    - build-essential
+    - python3-pip
+    - python3.5-venv
+    - python-psycopg2
+    - python3-psycopg2
+    - libpq-dev
+    - python3.5-dev
+    - python3.5
+    - git
+    - postgresql
+    - nginx
+
+  #create app user
+  - name: create {{ name }} user
+    user: name={{ name }} system=yes group=www-data home={{ home }}
+
+  # Set up PostgreSQL
+  - name: ensure postgresql is running and starts on boot
+    service: name=postgresql state=started enabled=true
+
+  # PostgreSQL user and database
+  - name: postgresql database
+    sudo_user: postgres
+    postgresql_db: >
+      name={{ name }}
+      encoding=utf8
+
+  - name: postgresql user
+    sudo_user: postgres
+    postgresql_user: >
+      name={{ name }}
+      db={{ name }}
+      state=present
