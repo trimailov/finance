@@ -1,9 +1,13 @@
-all: env pip
-dev: env dev-pip
+all: env pip-tools pip
+dev: env pip-tools dev-pip
 
 .PHONY: env
 env:
 	pyvenv-3.5 env
+
+.PHONY: pip-tools
+pip-tools:
+	env/bin/pip install pip-tools
 
 .PHONY: pip
 pip:
