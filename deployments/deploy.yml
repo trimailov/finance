@@ -6,8 +6,12 @@
     name: finance
     home: /opt/{{ name }}
     path: "{{ home }}/app"
+    repo: https://github.com/trimailov/finance
+    git_ref: "{{ branch_name }}"
+
 
   tasks:
+
 
   # apt-get update (if 24h passed since last time)
   - name: apt update
@@ -30,14 +34,18 @@
     - git
     - postgresql
     - nginx
+    - uwsgi
+
 
   #create app user
-  - name: create {{ name }} user
+  - name: create app user
     user: name={{ name }} system=yes group=www-data home={{ home }}
+
 
   # Set up PostgreSQL
   - name: ensure postgresql is running and starts on boot
     service: name=postgresql state=started enabled=true
+
 
   # PostgreSQL user and database
   - name: postgresql database
@@ -52,3 +60,55 @@
       name={{ name }}
       db={{ name }}
       state=present
+
+
+  # Set up the app
+  - name: clone repository
+    git: repo={{ repo }} dest={{ path }} version={{ git_ref }} force=yes
+    notify: reload source code
+    sudo_user: "{{ name }}"
+
+  - name: build project
+    command: make chdir={{ path }}
+    sudo_user: "{{ name }}"
+
+  - name: migrate database
+    command: env/bin/python manage.py migrate --noinput chdir={{ path }}
+    sudo_user: "{{ name }}"
+
+  - name: collectstatic
+    command: env/bin/python manage.py collectstatic --noinput chdir={{ path }}
+    sudo_user: "{{ name }}"
+
+
+  # Set up uwsgi
+  - name: create uwsgi log directory
+    file: path=/var/log/uwsgi state=directory owner={{ name }} group=www-data recurse=yes
+
+
+  - name: set up uwsgi for the app
+    template: src=templates/uwsgi.ini dest=/etc/uwsgi/apps-enabled/{{ name }}.ini
+
+
+  # Set up nginx
+  - name: set up nginx for the app
+    template: src=templates/nginx.conf dest=/etc/nginx/sites-available/{{ name }}.conf
+    notify: reload nginx
+
+  - name: link nginx config
+    file: src=/etc/nginx/sites-available/{{ name }}.conf dest=/etc/nginx/sites-enabled/{{ name }}.conf state=link
+
+  - name: ensure nginx is running and starts on boot
+    service: name=nginx state=started enabled=true
+
+  - name: remove default nginx vhost
+    file: path=/etc/nginx/sites-enabled/default state=absent
+    notify: reload nginx
+
+
+  # handlers
+  - name: reload source code
+    command: touch --no-create {{ path }}/{{ name }}/wsgi.py
+
+  - name: reload nginx
+    service: name=nginx state=reloaded
