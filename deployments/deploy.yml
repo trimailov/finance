@@ -54,6 +54,17 @@
       name={{ name }}
       encoding=utf8
 
+
+  # GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO finance;
+  - name: grant privileges on schema for app user
+    sudo_user: postgres
+    postgresql_privs: >
+      db={{ name }}
+      privs=ALL
+      type=schema
+      objs=public
+      role={{ name }}
+
   - name: postgresql user
     sudo_user: postgres
     postgresql_user: >
