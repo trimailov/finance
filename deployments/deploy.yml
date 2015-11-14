@@ -85,9 +85,17 @@
   - name: create uwsgi log directory
     file: path=/var/log/uwsgi state=directory owner={{ name }} group=www-data recurse=yes
 
-
   - name: set up uwsgi for the app
-    template: src=templates/uwsgi.ini dest=/etc/uwsgi/apps-enabled/{{ name }}.ini
+    template: src=templates/uwsgi.ini dest=/etc/uwsgi/apps-available/{{ name }}.ini
+
+  - name: link uwsgi config
+    file: src=/etc/uwsgi/apps-available/{{ name }}.ini dest=/etc/uwsgi/apps-enabled/{{ name }}.ini state=link
+
+  - name: set up uwsgi with Upstart
+    template: src=templates/uwsgi.conf dest=/etc/init/uwsgi.conf
+
+  - name: ensure uwsgi is running and starts on boot
+    service: name=uwsgi state=started enabled=true
 
 
   # Set up nginx
