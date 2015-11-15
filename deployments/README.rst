@@ -20,7 +20,7 @@ To relaunch provisioning::
 Deploy to production
 --------------------
 
-Deploys ``prodcution`` branch.
+Deploys ``production`` branch.
 
 ::
 
