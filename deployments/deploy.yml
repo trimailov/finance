@@ -14,11 +14,11 @@
 
 
   # apt-get update (if 24h passed since last time)
-  - name: apt update
-    apt: update_cache=yes cache_valid_time=86400
-
   - name: add repositories
     apt_repository: repo="ppa:fkrull/deadsnakes" state=present
+
+  - name: apt update
+    apt: update_cache=yes cache_valid_time=86400
 
   - name: apt packages
     apt: pkg={{ item }} state=latest
