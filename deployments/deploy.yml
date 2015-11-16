@@ -68,6 +68,9 @@
     notify: reload source code
     sudo_user: "{{ name }}"
 
+  - name: copy secret settings
+    template: src=../finance/settings/secret.py dest={{ path }}/finance/settings/secret.py
+
   - name: build project
     command: make chdir={{ path }}
     sudo_user: "{{ name }}"
