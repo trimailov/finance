@@ -15,16 +15,17 @@ from django.core.urlresolvers import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from finance.settings import secret
+
 SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# BASE_DIR (where manage.py is) is ine folder up, then settings dir
+# BASE_DIR (where manage.py is) is ine folder up, than settings dir
 BASE_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')s5fsis8n#4pmza9@yftzc@kr#iht8s8p*ao!_+#4b)n=sp*l)'
+SECRET_KEY = secret.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -116,6 +117,9 @@ LOGIN_REDIRECT_URL = reverse_lazy('accounts.views.login_redirect')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'var/www/static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'var/www/media/')
 
 # needed for pipeline
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
