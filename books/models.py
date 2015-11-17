@@ -8,7 +8,7 @@ class Receipt(models.Model):
     title = fields.CharField(max_length=255)
     price = fields.DecimalField(max_digits=10, decimal_places=2)
     created = fields.DateTimeField(auto_now=True)
-    modified = fields.DateTimeField(default=timezone.now())
+    modified = fields.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User)
 
     def __str__(self):
