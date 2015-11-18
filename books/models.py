@@ -4,7 +4,7 @@ from django.db.models import fields
 from django.utils import timezone
 
 
-class Receipt(models.Model):
+class Transaction(models.Model):
     title = fields.CharField(max_length=255)
     price = fields.DecimalField(max_digits=10, decimal_places=2)
     created = fields.DateTimeField(auto_now=True)
