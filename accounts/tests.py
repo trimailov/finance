@@ -23,6 +23,17 @@ class LoginTests(TestCase):
         )
         self.assertRedirects(response, reverse('transaction_list'))
 
+    def test_login_and_remember_post(self):
+        c = Client()
+        response = c.post(
+            reverse('login'),
+            {'username': self.user.username,
+             'password': 'secret',
+             'remember_me': 'on'},
+            follow=True
+        )
+        self.assertRedirects(response, reverse('transaction_list'))
+
     def test_login_redirect(self):
         c = Client()
         logged_in = c.login(username=self.user.username, password='secret')
