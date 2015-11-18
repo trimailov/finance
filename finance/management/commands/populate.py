@@ -7,7 +7,7 @@ from django.db import IntegrityError
 import factory
 
 from accounts.factories import UserFactory
-from books.factories import ReceiptFactory
+from books.factories import TransactionFactory
 
 
 class Command(BaseCommand):
@@ -24,9 +24,9 @@ class Command(BaseCommand):
             admin = User.objects.get(username='admin')
             print("admin user already exists")
 
-        ReceiptFactory.create_batch(
+        TransactionFactory.create_batch(
             10,
-            price=factory.Sequence(lambda n: random.randrange(-10, 10)),
+            price=factory.Sequence(lambda n: random.randrange(0, 10)),
             user=admin,
         )
-        print("Receipts for admin created")
+        print("Transactions for admin created")

@@ -4,6 +4,6 @@ from books import views
 
 
 urlpatterns = [
-    url(r'^$', views.receipt_list, name='receipt_list'),
-    url(r'^create/$', views.receipt_create, name='receipt_create'),
+    url(r'^$', views.transaction_list, name='transaction_list'),
+    url(r'^create/$', views.transaction_create, name='transaction_create'),
 ]

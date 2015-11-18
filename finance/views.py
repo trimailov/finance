@@ -5,5 +5,5 @@ from django.shortcuts import render
 
 def home(request):
     if request.user.is_authenticated():
-        return redirect(reverse('receipt_list'))
+        return redirect(reverse('transaction_list'))
     return render(request, 'index.html')

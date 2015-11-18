@@ -3,7 +3,7 @@
 {% load render_field from widget_tweaks %}
 
 {% block books_content %}
-<form class="form-simple form-receipt-create" method="post">
+<form class="form-simple form-transaction-create" method="post">
   {% csrf_token %}
   {{ form.non_field_errors }}
 

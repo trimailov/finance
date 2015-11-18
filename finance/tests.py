@@ -20,4 +20,4 @@ class HomePageTests(TestCase):
         self.assertTrue(logged_in)
 
         response = c.get(reverse('home'))
-        self.assertRedirects(response, reverse('receipt_list'))
+        self.assertRedirects(response, reverse('transaction_list'))

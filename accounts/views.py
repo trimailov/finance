@@ -16,4 +16,4 @@ def login(request, *args, **kwargs):
 
 @login_required
 def login_redirect(request):
-    return redirect(reverse('receipt_list'))
+    return redirect(reverse('transaction_list'))

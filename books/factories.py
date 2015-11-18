@@ -4,10 +4,11 @@ from accounts.factories import UserFactory
 from books import models
 
 
-class ReceiptFactory(factory.DjangoModelFactory):
-    title = factory.Sequence(lambda n: 'receipt%d' % n)
-    price = 10
+class TransactionFactory(factory.DjangoModelFactory):
+    title = factory.Sequence(lambda n: 'transaction_%d' % n)
+    amount = 10
+    category = models.Transaction.EXPENSE
     user = factory.SubFactory(UserFactory)
 
     class Meta:
-        model = models.Receipt
+        model = models.Transaction

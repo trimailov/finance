@@ -2,39 +2,42 @@ from django.core.urlresolvers import reverse
 from django.test import Client
 from django.test import TestCase
 
-from books.factories import ReceiptFactory
+from books.factories import TransactionFactory
 from books.factories import UserFactory
-from books.models import Receipt
+from books.models import Transaction
 
 
-class ReceiptTests(TestCase):
+class TransactionTests(TestCase):
     def setUp(self):
         self.user = UserFactory()
 
     def test_create_model(self):
-        self.assertEqual(0, Receipt.objects.count())
-        ReceiptFactory()
-        self.assertEqual(1, Receipt.objects.count())
-        self.assertEqual(str(Receipt.objects.latest('id')), 'receipt0_10.00')
+        self.assertEqual(0, Transaction.objects.count())
+        TransactionFactory()
+        self.assertEqual(1, Transaction.objects.count())
+        self.assertEqual(str(Transaction.objects.latest('id')),
+                         'transaction_0')
 
-    def test_receipt_create_get(self):
+    def test_transaction_create_get(self):
         c = Client()
         logged_in = c.login(username=self.user.username, password='secret')
         self.assertTrue(logged_in)
 
-        response = c.get(reverse('receipt_create'))
+        response = c.get(reverse('transaction_create'))
         self.assertEqual(200, response.status_code)
 
-    def test_receipt_create_post(self):
+    def test_transaction_create_post(self):
         c = Client()
         logged_in = c.login(username=self.user.username, password='secret')
         self.assertTrue(logged_in)
 
-        self.assertEqual(0, Receipt.objects.count())
-        response = c.post(reverse('receipt_create'),
-                          {'title': 'forty-two', 'price': 42},
+        self.assertEqual(0, Transaction.objects.count())
+        response = c.post(reverse('transaction_create'),
+                          {'title': 'forty-two',
+                           'amount': 42,
+                           'category': Transaction.EXPENSE},
                           follow=True)
-        self.assertRedirects(response, reverse('receipt_list'))
-        self.assertEqual(1, Receipt.objects.count())
-        self.assertEqual('forty-two', Receipt.objects.latest('id').title)
-        self.assertEqual(42, Receipt.objects.latest('id').price)
+        self.assertRedirects(response, reverse('transaction_list'))
+        self.assertEqual(1, Transaction.objects.count())
+        self.assertEqual('forty-two', Transaction.objects.latest('id').title)
+        self.assertEqual(42, Transaction.objects.latest('id').amount)

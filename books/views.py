@@ -9,24 +9,26 @@ from books import forms
 
 
 @login_required
-def receipt_list(request):
+def transaction_list(request):
     user_id = request.user.id
     user = User.objects.get(id=user_id)
     ctx = {}
     ctx['user'] = user
-    ctx['receipts'] = models.Receipt.objects.filter(user=user).order_by('-id')
-    return render(request, 'receipt_list.html', context=ctx)
+    ctx['transactions'] = models.Transaction.objects \
+        .filter(user=user) \
+        .order_by('-id')
+    return render(request, 'transaction_list.html', context=ctx)
 
 
 @login_required
-def receipt_create(request):
+def transaction_create(request):
     if request.method == "POST":
-        form = forms.ReceiptForm(request.POST)
+        form = forms.TransactionForm(request.POST)
         if form.is_valid():
             form.instance.user = request.user
             form.save()
-            return redirect(reverse('receipt_list'))
+            return redirect(reverse('transaction_list'))
     else:
-        form = forms.ReceiptForm()
+        form = forms.TransactionForm()
 
-    return render(request, 'receipt_create.html', {'form': form})
+    return render(request, 'transaction_create.html', {'form': form})

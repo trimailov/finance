@@ -21,7 +21,7 @@ class LoginTests(TestCase):
             {'username': self.user.username, 'password': 'secret'},
             follow=True
         )
-        self.assertRedirects(response, reverse('receipt_list'))
+        self.assertRedirects(response, reverse('transaction_list'))
 
     def test_login_redirect(self):
         c = Client()
@@ -29,4 +29,4 @@ class LoginTests(TestCase):
         self.assertTrue(logged_in)
 
         response = c.get(reverse('login_redirect'))
-        self.assertRedirects(response, reverse('receipt_list'))
+        self.assertRedirects(response, reverse('transaction_list'))
