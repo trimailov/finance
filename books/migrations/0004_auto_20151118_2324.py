@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='transaction',
             name='category',
-            field=models.CharField(choices=[(0, 'expense'), (1, 'income')], max_length=1, default=0),
+            field=models.CharField(choices=[('exp', 'expense'), ('inc', 'income')], max_length=3, default=0),
             preserve_default=False,
         ),
         migrations.AlterField(

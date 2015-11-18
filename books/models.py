@@ -5,14 +5,16 @@ from django.utils import timezone
 
 
 class Transaction(models.Model):
+    EXPENSE = 'exp'
+    INCOME = 'inc'
     CATEGORY_CHOICES = (
-        (0, 'expense'),
-        (1, 'income'),
+        (EXPENSE, 'expense'),
+        (INCOME, 'income'),
     )
 
     title = fields.CharField(max_length=255)
     amount = fields.DecimalField(max_digits=10, decimal_places=2)
-    category = fields.CharField(max_length=1, choices=CATEGORY_CHOICES)
+    category = fields.CharField(max_length=3, choices=CATEGORY_CHOICES)
     created = fields.DateTimeField(auto_now=True)
     modified = fields.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User)
