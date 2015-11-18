@@ -1,8 +1,11 @@
+from django.contrib.auth.models import User
+from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.test import Client
 from django.test import TestCase
 
 from accounts.factories import UserFactory
+from books.models import Transaction
 
 
 class HomePageTests(TestCase):
@@ -21,3 +24,15 @@ class HomePageTests(TestCase):
 
         response = c.get(reverse('home'))
         self.assertRedirects(response, reverse('transaction_list'))
+
+
+class PopulateTests(TestCase):
+    def test_populate_command(self):
+        call_command('populate')
+        self.assertTrue(User.objects.get(username='admin'))
+        self.assertEqual(Transaction.objects.count(), 10)
+
+        # test if no error is raised if ran 2nd time
+        call_command('populate')
+        self.assertTrue(User.objects.get(username='admin'))
+        self.assertEqual(Transaction.objects.count(), 20)
