@@ -2,6 +2,7 @@ cssmin
 Django
 django-pipeline
 django-widget-tweaks
+factory-boy
 libsass
 opbeat
 psycopg2
