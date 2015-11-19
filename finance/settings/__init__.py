@@ -28,9 +28,9 @@ BASE_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 SECRET_KEY = secret.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '188.166.117.76']
 
 
 # Application definition
@@ -166,3 +166,10 @@ PIPELINE_CSS = {
 
 # opbeat settings
 OPBEAT = secret.OPBEAT
+
+# recomended settings from `./manage.py check --deploy`
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+SECRET_KEY = secret.SECRET_KEY
