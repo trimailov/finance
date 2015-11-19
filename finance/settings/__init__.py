@@ -45,11 +45,13 @@ INSTALLED_APPS = (
     'accounts',
     'books',
     'finance',
+    'opbeat.contrib.django',
     'pipeline',
     'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -161,3 +163,6 @@ PIPELINE_CSS = {
         },
     },
 }
+
+# opbeat settings
+OPBEAT = secret.OPBEAT

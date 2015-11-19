@@ -3,5 +3,6 @@ Django
 django-pipeline
 django-widget-tweaks
 libsass
+opbeat
 psycopg2
 uwsgi
