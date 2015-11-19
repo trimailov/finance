@@ -10,6 +10,9 @@
     git_ref: "{{ branch_name }}"
 
 
+  environment:
+      DJANGO_SETTINGS_MODULE: finance.settings.prod
+
   tasks:
 
 
@@ -82,7 +85,6 @@
   - name: collectstatic
     command: env/bin/python manage.py collectstatic --noinput chdir={{ path }}
     sudo_user: "{{ name }}"
-
 
   # Set up uwsgi
   - name: create uwsgi log directory
