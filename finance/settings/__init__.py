@@ -173,3 +173,16 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 SECRET_KEY = secret.SECRET_KEY
+
+# set up error sending on error
+ADMINS = (
+    ('admin', 'j.trimailovas@gmail.com'),
+)
+
+SERVER_EMAIL = 'financetraceback@gmail.com'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'financetraceback@gmail.com'
+EMAIL_HOST_PASSWORD = secret.EMAIL_HOST_PASSWORD
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
