@@ -22,7 +22,7 @@ dev-pip:
 
 .PHONY: run
 run:
-	env/bin/python manage.py runserver 0.0.0.0:8080
+	env/bin/python manage.py runserver 0.0.0.0:8080 --settings=finance.settings.dev
 
 .PHONY: migrate
 migrate:
