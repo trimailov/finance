@@ -117,7 +117,9 @@
     notify: reload nginx
 
 
-  # handlers
+  handlers:
+
+
   - name: reload source code
     command: touch --no-create {{ path }}/{{ name }}/wsgi.py
 
