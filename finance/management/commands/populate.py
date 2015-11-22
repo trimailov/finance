@@ -25,6 +25,7 @@ class Command(BaseCommand):
         # Factory creates simple user, so ``is_staff`` is set later
         self.admin = UserFactory(username='admin', password='asdasd')
         self.admin.is_staff = True
+        self.admin.is_superuser = True
         self.admin.save()
         print("admin user have been created successfully")
 
