@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'finance',
     'opbeat.contrib.django',
     'pipeline',
+    'registration',
     'widget_tweaks',
 )
 
