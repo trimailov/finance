@@ -10,6 +10,7 @@
   {% for field in form %}
   <fieldset class="form-group">
     {{ field.label_tag }}
+    {{ field.errors }}
     {% render_field field class="form-control" %}
   </fieldset>
   {% endfor %}
