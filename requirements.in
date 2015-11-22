@@ -1,6 +1,7 @@
 cssmin
 Django
 django-pipeline
+django-registration
 django-widget-tweaks
 factory-boy
 libsass
