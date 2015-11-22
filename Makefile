@@ -38,7 +38,7 @@ tags:
 
 .PHONY: test
 test:
-	env/bin/python manage.py test
+	env/bin/python manage.py test --settings=finance.settings.dev
 
 .PHONY: coverage
 coverage:
