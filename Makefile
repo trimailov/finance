@@ -42,7 +42,7 @@ test:
 
 .PHONY: coverage
 coverage:
-	env/bin/coverage run --source=finance,accounts,books --omit=finance/wsgi.py manage.py test
+	env/bin/coverage run --source=finance,accounts,books --omit=finance/wsgi.py,"*/migrations*" manage.py test --settings=finance.settings.dev
 	env/bin/coverage report
 	env/bin/coverage html
 
