@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import Client
 from django.test import TestCase
@@ -41,3 +42,25 @@ class LoginTests(TestCase):
 
         response = c.get(reverse('login_redirect'))
         self.assertRedirects(response, reverse('transaction_list'))
+
+
+class SignUpTests(TestCase):
+    def test_sign_up_get(self):
+        c = Client()
+        response = c.get(reverse('registration_register'))
+        self.assertEqual(200, response.status_code)
+
+    def test_sign_up_post(self):
+        c = Client()
+        response = c.post(
+            reverse('registration_register'),
+            {'username': 'Anatolijus',
+             'email': 'anatolka@example.com',
+             'password1': 'secret',
+             'password2': 'secret'},
+            follow=True
+        )
+        self.assertRedirects(response, reverse('transaction_list'))
+
+        self.assertTrue(User.objects.get(username='Anatolijus',
+                                         is_active=True))
