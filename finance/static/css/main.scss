@@ -9,3 +9,9 @@ $black: #000000;
   max-width: 350px;
   margin: auto;
 }
+
+// for django debug toolbar
+// https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+[hidden][style="display: block;"] {
+  display: block !important;
+}
