@@ -180,10 +180,10 @@ ADMINS = (
     ('admin', 'j.trimailovas@gmail.com'),
 )
 
-SERVER_EMAIL = 'financetraceback@gmail.com'
+SERVER_EMAIL = 'finantious@gmail.com'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'financetraceback@gmail.com'
+EMAIL_HOST_USER = 'finantious@gmail.com'
 EMAIL_HOST_PASSWORD = secret.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
