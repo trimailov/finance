@@ -7,6 +7,7 @@ import factory
 
 from accounts.factories import UserFactory
 from books.factories import TransactionFactory
+from books.models import Transaction
 
 
 class Command(BaseCommand):
@@ -33,7 +34,7 @@ class Command(BaseCommand):
         TransactionFactory.create_batch(
             10,
             amount=factory.Sequence(lambda n: random.randrange(0, 10)),
-            category=random.randrange(0, 2),  # random range from 0 to 1
+            category=random.choice([Transaction.EXPENSE, Transaction.INCOME]),
             user=self.admin,
         )
         print("Transactions for admin created")
