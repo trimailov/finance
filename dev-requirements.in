@@ -1,4 +1,3 @@
 coverage
 django-debug-toolbar
 ipdb
-pyinotify
