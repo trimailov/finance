@@ -156,7 +156,7 @@ PIPELINE_CSS = {
     'finance': {
         'source_filenames': (
             'css/bootstrap.min.css',
-            'scss/main.scss',
+            'css/main.scss',
         ),
         'output_filename': 'css/finance.css',
         'extra_context': {
