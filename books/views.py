@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db.models import Sum
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from books import models
+from books.models import Transaction
 from books import forms
 
 
@@ -12,11 +13,20 @@ from books import forms
 def transaction_list(request):
     user_id = request.user.id
     user = User.objects.get(id=user_id)
-    ctx = {}
-    ctx['user'] = user
-    ctx['transactions'] = models.Transaction.objects \
+    user_transactions = Transaction.objects \
         .filter(user=user) \
         .order_by('-id')
+
+    ctx = {}
+    ctx['user'] = user
+    ctx['transactions'] = user_transactions
+    ctx['negative_transaction_sum'] = user_transactions \
+        .filter(category=Transaction.EXPENSE) \
+        .aggregate(Sum('amount')).get('amount__sum')
+    ctx['positive_transaction_sum'] = user_transactions \
+        .filter(category=Transaction.INCOME) \
+        .aggregate(Sum('amount')).get('amount__sum')
+    print(ctx['positive_transaction_sum'], ctx['negative_transaction_sum'])
     return render(request, 'transaction_list.html', context=ctx)
 
 
