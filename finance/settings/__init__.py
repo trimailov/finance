@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['localhost', '188.166.117.76',
 # Application definition
 
 INSTALLED_APPS = (
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +49,6 @@ INSTALLED_APPS = (
     'finance',
     'opbeat.contrib.django',
     'pipeline',
-    'registration',
     'widget_tweaks',
 )
 
