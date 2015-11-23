@@ -116,6 +116,11 @@
     file: path=/etc/nginx/sites-enabled/default state=absent
     notify: reload nginx
 
+  # at the end of deployment restart uwsgi, so new code will work
+  - name: restart uwsgi
+    command: /bin/true
+    notify: restart uwsgi
+
 
   handlers:
 
@@ -125,3 +130,6 @@
 
   - name: reload nginx
     service: name=nginx state=reloaded
+
+  - name: restart uwsgi
+    service: name=uwsgi state=restarted
