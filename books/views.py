@@ -26,7 +26,7 @@ def transaction_list(request):
     ctx['positive_transaction_sum'] = user_transactions \
         .filter(category=Transaction.INCOME) \
         .aggregate(Sum('amount')).get('amount__sum')
-    print(ctx['positive_transaction_sum'], ctx['negative_transaction_sum'])
+
     return render(request, 'transaction_list.html', context=ctx)
 
 
