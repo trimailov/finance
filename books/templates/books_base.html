@@ -4,8 +4,11 @@
 
 {% block user_controls %}
 <div class="row">
-  <div class="col-xs-12">
-    <a class="btn" href={% url "logout" %}?next={% url "home" %}>Logout</a>
+  <div class="col-xs-6">
+    <div class="btn">{{ user }}</div>
+  </div>
+  <div class="col-xs-6 text-right">
+      <a class="btn" href={% url "logout" %}?next={% url "home" %}>Logout</a>
   </div>
 </div>
 {% endblock %}
