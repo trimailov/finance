@@ -2,12 +2,16 @@
 
 {% block books_content %}
 <div class="row">
-  <div class="col-xs-8">
+  <div class="col-xs-6 col-md-8">
     <a class="btn btn-primary" href="{% url 'transaction_create' %}">New entry</a>
   </div>
-  <div class="col-xs-4">
-    <div class="text-success">€ {{ positive_transaction_sum|default_if_none:'0.00' }}</div>
-    <div class="text-danger">€ {{ negative_transaction_sum|default_if_none:'0.00' }}</div>
+  <div class="col-xs-6 col-md-4 text-center">
+    <span class="octicon octicon-arrow-up label label-success">
+      € {{ positive_transaction_sum|default_if_none:'0.00' }}
+    </span>
+    <span class="octicon octicon-arrow-down label label-danger">
+      € {{ negative_transaction_sum|default_if_none:'0.00' }}
+    </span>
   </div>
 </div>
 
@@ -18,7 +22,7 @@
   <div class="col-xs-8">
     {{ transaction.title }}
   </div>
-  <div class="col-xs-4">
+  <div class="col-xs-4 text-center">
     {% if transaction.category == transaction.INCOME %}
       <span class="text-success">€ {{ transaction.amount }}</span>
     {% else %}
