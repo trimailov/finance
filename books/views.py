@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 
@@ -41,4 +42,14 @@ def transaction_create(request):
     else:
         form = forms.TransactionForm()
 
+    return render(request, 'transaction_create.html', {'form': form})
+
+
+@login_required
+def transaction_update(request, id):
+    instance = get_object_or_404(Transaction, id=id)
+    form = forms.TransactionForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('transaction_list'))
     return render(request, 'transaction_create.html', {'form': form})

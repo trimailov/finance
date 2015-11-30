@@ -31,7 +31,7 @@
     {% endif %}
     </td>
     <td>
-      <a href="#"><span class="octicon octicon-pencil"></span></a>
+      <a href="{% url 'transaction_update' transaction.id %}"><span class="octicon octicon-pencil"></span></a>
     </td>
   </tr>
   {% endfor %}
