@@ -33,15 +33,10 @@ def transaction_list(request):
 
 @login_required
 def transaction_create(request):
-    if request.method == "POST":
-        form = forms.TransactionForm(request.POST)
-        if form.is_valid():
-            form.instance.user = request.user
-            form.save()
-            return redirect(reverse('transaction_list'))
-    else:
-        form = forms.TransactionForm()
-
+    form = forms.TransactionForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('transaction_list'))
     return render(request, 'transaction_create.html', {'form': form})
 
 
