@@ -10,6 +10,10 @@ $black: #000000;
   margin: auto;
 }
 
+.transaction-list {
+  margin-top: 15px;
+}
+
 // for django debug toolbar
 // https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
 [hidden][style="display: block;"] {

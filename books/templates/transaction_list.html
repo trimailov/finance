@@ -15,21 +15,28 @@
   </div>
 </div>
 
-
-
-{% for transaction in transactions %}
-<div class="row transaction-list-entry">
-  <div class="col-xs-8">
-    {{ transaction.title }}
-  </div>
-  <div class="col-xs-4 text-center">
+<div class="table-responsive transaction-list">
+<table class="table table-striped">
+  <tbody>
+  {% for transaction in transactions %}
+  <tr>
+    <td>
+      {{ transaction.title }}
+    </td>
+    <td>
     {% if transaction.category == transaction.INCOME %}
       <span class="text-success">€ {{ transaction.amount }}</span>
     {% else %}
       <span class="text-danger">€ {{ transaction.amount }}</span>
     {% endif %}
-  </div>
+    </td>
+    <td>
+      <a href="#"><span class="octicon octicon-pencil"></span></a>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
 </div>
-{% endfor %}
 
 {% endblock %}
