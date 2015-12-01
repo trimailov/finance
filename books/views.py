@@ -35,6 +35,7 @@ def transaction_list(request):
 def transaction_create(request):
     form = forms.TransactionForm(request.POST or None)
     if form.is_valid():
+        form.instance.user = request.user
         form.save()
         return redirect(reverse('transaction_list'))
     return render(request, 'transaction_create.html', {'form': form})
