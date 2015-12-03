@@ -11,14 +11,16 @@ pip-tools:
 
 .PHONY: pip
 pip:
-	env/bin/pip-compile requirements.in
 	env/bin/pip-sync requirements.txt
 
 .PHONY: dev-pip
 dev-pip:
+	env/bin/pip-sync requirements.txt dev-requirements.txt
+
+.PHONY: pip-compile
+pip-compile:
 	env/bin/pip-compile requirements.in
 	env/bin/pip-compile dev-requirements.in
-	env/bin/pip-sync requirements.txt dev-requirements.txt
 
 .PHONY: run
 run:
@@ -38,11 +40,11 @@ tags:
 
 .PHONY: test
 test:
-	env/bin/python manage.py test --settings=finance.settings.dev
+	env/bin/python manage.py test --settings=finance.settings.testing
 
 .PHONY: coverage
 coverage:
-	env/bin/coverage run --source=finance,accounts,books --omit=finance/wsgi.py,"*/migrations*" manage.py test --settings=finance.settings.dev
+	env/bin/coverage run --source=finance,accounts,books --omit=finance/wsgi.py,"*/migrations*" manage.py test --settings=finance.settings.testing
 	env/bin/coverage report
 	env/bin/coverage html
 

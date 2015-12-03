@@ -127,8 +127,5 @@ tags
 TAGS
 Tags
 
-### pip-tools ###
-*requirements.txt
-
 # ignore secret settings
 finance/settings/secret.py
