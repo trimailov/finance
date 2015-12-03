@@ -4,6 +4,7 @@ django-pipeline
 django-registration
 django-widget-tweaks
 factory-boy
+jinja2
 libsass
 opbeat
 psycopg2
