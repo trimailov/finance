@@ -79,6 +79,14 @@ TEMPLATES = [
             ],
         },
     },
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'extensions': ['pipeline.templatetags.ext.PipelineExtension']
+        }
+    }
 ]
 
 WSGI_APPLICATION = 'finance.wsgi.application'
