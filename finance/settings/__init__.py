@@ -114,7 +114,7 @@ USE_TZ = True
 
 
 # redirect after login
-LOGIN_REDIRECT_URL = reverse_lazy('accounts.views.login_redirect')
+LOGIN_REDIRECT_URL = reverse_lazy('login_redirect')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
