@@ -5,6 +5,11 @@ $grey: #A9B2B8;
 $white: #FFFFFF;
 $black: #000000;
 
+body {
+  min-width: 30em;
+  width: auto;
+}
+
 .form-simple {
   max-width: 350px;
   margin: auto;
