@@ -1,3 +1,5 @@
+import os
+
 from finance.settings import *
 
 DEBUG = True
@@ -42,3 +44,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+# file base email backend on development
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'tmp/app-messages')
