@@ -188,10 +188,12 @@ ADMINS = (
     ('admin', 'j.trimailovas@gmail.com'),
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 SERVER_EMAIL = 'finantious@gmail.com'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'finantious@gmail.com'
 EMAIL_HOST_PASSWORD = secret.EMAIL_HOST_PASSWORD
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
