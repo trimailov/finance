@@ -19,7 +19,7 @@ from finance.settings import secret
 
 SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# BASE_DIR (where manage.py is) is ine folder up, than settings dir
+# BASE_DIR (where manage.py is) is one folder up, than settings dir
 BASE_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 
 # Quick-start development settings - unsuitable for production
