@@ -1,6 +1,6 @@
-{% extends "books_base.html" %}
+{% extends "logged_in_base.html" %}
 
-{% block books_content %}
+{% block logged_in_content %}
 <div class="row">
   <div class="col-xs-6 col-md-8">
     <a class="btn btn-primary" href="{% url 'transaction_create' %}">New entry</a>

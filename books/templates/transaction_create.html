@@ -1,8 +1,8 @@
-{% extends "books_base.html" %}
+{% extends "logged_in_base.html" %}
 
 {% load render_field from widget_tweaks %}
 
-{% block books_content %}
+{% block logged_in_content %}
 <form class="form-simple form-transaction-create" method="post">
   {% csrf_token %}
   {{ form.non_field_errors }}

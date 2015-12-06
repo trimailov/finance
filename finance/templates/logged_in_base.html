@@ -5,15 +5,15 @@
 {% block user_controls %}
 <div class="row">
   <div class="col-xs-6">
-    <div class="btn">{{ user }}</div>
+    <span>{{ user }}</span>
   </div>
   <div class="col-xs-6 text-right">
-      <a class="btn" href={% url "logout" %}?next={% url "home" %}>Logout</a>
+    <a class="btn" href={% url "logout" %}?next={% url "home" %}>Logout</a>
   </div>
 </div>
 {% endblock %}
 
-{% block books_content %}
+{% block logged_in_content %}
 {% endblock %}
 
 {% endblock %}
