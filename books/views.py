@@ -8,15 +8,26 @@ from django.shortcuts import render
 
 from books.models import Transaction
 from books import forms
+from books import services
 
 
 @login_required
 def transaction_list(request):
     user_id = request.user.id
     user = User.objects.get(id=user_id)
-    user_transactions = Transaction.objects \
-        .filter(user=user) \
-        .order_by('-id')
+
+    fltr = request.GET.get('filter', None)
+    if fltr:
+        if fltr == "this_month":
+            user_transactions = services.get_months_transactions(user)
+        elif fltr == "last_month":
+            user_transactions = services.get_last_months_transactions(user)
+        elif fltr == "this_year":
+            user_transactions = services.get_this_years_transactions(user)
+    else:
+        user_transactions = Transaction.objects.filter(user=user)
+
+    user_transactions = user_transactions.order_by('-created')
 
     ctx = {}
     ctx['user'] = user
