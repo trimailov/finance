@@ -8,4 +8,5 @@ jinja2
 libsass
 opbeat
 psycopg2
+pytz
 uwsgi
