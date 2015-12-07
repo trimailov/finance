@@ -47,6 +47,39 @@ class TransactionTests(TestCase):
         self.assertEqual('forty-two', Transaction.objects.latest('id').title)
         self.assertEqual(42, Transaction.objects.latest('id').amount)
 
+    def test_transaction_update_get(self):
+        c = Client()
+        logged_in = c.login(username=self.user.username, password='secret')
+        self.assertTrue(logged_in)
+
+        t = TransactionFactory(title='first',
+                               amount=1,
+                               category=Transaction.EXPENSE)
+        self.assertEqual(1, Transaction.objects.count())
+
+        response = c.get(reverse('transaction_update', args=[t.id]))
+        self.assertEqual(200, response.status_code)
+
+    def test_transaction_update_post(self):
+        c = Client()
+        logged_in = c.login(username=self.user.username, password='secret')
+        self.assertTrue(logged_in)
+
+        t = TransactionFactory(title='first',
+                               amount=1,
+                               category=Transaction.EXPENSE)
+        self.assertEqual(1, Transaction.objects.count())
+
+        response = c.post(reverse('transaction_update', args=[t.id]),
+                          {'title': 'forty-two',
+                           'amount': 42,
+                           'category': Transaction.EXPENSE},
+                          follow=True)
+        self.assertRedirects(response, reverse('transaction_list'))
+        self.assertEqual(1, Transaction.objects.count())
+        self.assertEqual('forty-two', Transaction.objects.latest('id').title)
+        self.assertEqual(42, Transaction.objects.latest('id').amount)
+
 
 class TransactionFilterTests(TestCase):
     def setUp(self):
