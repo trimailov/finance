@@ -87,25 +87,29 @@ class TransactionFilterTests(TestCase):
 
         self.this_month = TransactionFactory(
             title='this_month',
-            created=datetime(2015, 4, 23, tzinfo=pytz.utc)
+            created=datetime(2015, 4, 23, tzinfo=pytz.utc),
+            user=self.user,
         )
 
         self.last_month = TransactionFactory(
             title='last_month',
-            created=datetime(2015, 3, 23, tzinfo=pytz.utc)
+            created=datetime(2015, 3, 23, tzinfo=pytz.utc),
+            user=self.user,
         )
 
         self.this_year = TransactionFactory(
             title='this_year',
-            created=datetime(2015, 1, 23, tzinfo=pytz.utc)
+            created=datetime(2015, 1, 23, tzinfo=pytz.utc),
+            user=self.user,
         )
 
     def test_months_transactions(self):
         with mock.patch('books.services.timezone') as mock_now:
             mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
 
-            transactions = services.get_months_transactions()
-            transactions.order_by("-created")  # make test deterministic
+            transactions = services.get_months_transactions(self.user)
+            # make test deterministic
+            transactions = transactions.order_by("-created")
 
             self.assertEqual(len(transactions), 1)
             self.assertEqual(transactions[0].title, 'this_month')
@@ -114,8 +118,9 @@ class TransactionFilterTests(TestCase):
         with mock.patch('books.services.timezone') as mock_now:
             mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
 
-            transactions = services.get_last_months_transactions()
-            transactions.order_by("-created")  # make test deterministic
+            transactions = services.get_last_months_transactions(self.user)
+            # make test deterministic
+            transactions = transactions.order_by("-created")
 
             self.assertEqual(len(transactions), 2)
             self.assertEqual(transactions[0].title, 'this_month')
@@ -125,8 +130,9 @@ class TransactionFilterTests(TestCase):
         with mock.patch('books.services.timezone') as mock_now:
             mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
 
-            transactions = services.get_this_years_transactions()
-            transactions.order_by("-created")  # make test deterministic
+            transactions = services.get_this_years_transactions(self.user)
+            # make test deterministic
+            transactions = transactions.order_by("-created")
 
             self.assertEqual(len(transactions), 3)
             self.assertEqual(transactions[0].title, 'this_month')
