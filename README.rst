@@ -1,7 +1,16 @@
 finance
 =======
 
-Small django app to track your income and expenses
+Small django app to track your income and expenses: `finantious.com <http://finantious.com>`__.
+
+Most urgent TODOs
+-----------------
+
+- Editable user profile
+  - Password reset feature
+  - custom currencies
+
+- Income/Expense graph
 
 Development
 -----------
