@@ -3,6 +3,11 @@ finance
 
 Small django app to track your income and expenses: `finantious.com <http://finantious.com>`__.
 
+Screenshot of how app looks in dev environment
+
+.. image:: docs/dev-screenshot.png
+   :alt: dev env screenshot
+
 Most urgent TODOs
 -----------------
 
