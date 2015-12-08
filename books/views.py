@@ -13,6 +13,8 @@ from books import services
 
 @login_required
 def transaction_list(request):
+    ctx = {}
+
     user_id = request.user.id
     user = User.objects.get(id=user_id)
 
@@ -20,16 +22,19 @@ def transaction_list(request):
     if fltr:
         if fltr == "this_month":
             user_transactions = services.get_months_transactions(user)
+            ctx['fltr'] = fltr
         elif fltr == "last_month":
             user_transactions = services.get_last_months_transactions(user)
+            ctx['fltr'] = fltr
         elif fltr == "this_year":
             user_transactions = services.get_this_years_transactions(user)
+            ctx['fltr'] = fltr
     else:
         user_transactions = Transaction.objects.filter(user=user)
+        ctx['fltr'] = None
 
     user_transactions = user_transactions.order_by('-created')
 
-    ctx = {}
     ctx['user'] = user
     ctx['transactions'] = user_transactions
     ctx['negative_transaction_sum'] = user_transactions \
