@@ -1,3 +1,4 @@
 ---
 server_name: localhost
+allowed_hosts: localhost
 branch_name: master

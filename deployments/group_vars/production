@@ -1,3 +1,4 @@
 ---
 server_name: finantious.com, www.finantious.com
+allowed_hosts: finantious.com|www.finantious.com
 branch_name: production
