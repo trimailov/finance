@@ -18,16 +18,16 @@
 <div class="row">
   <div class="col-sm-12 text-center">
     <div class="btn-group btn-group-sm" role="group" aria-label="Transaction filter by date">
-      <a href="{% url 'transaction_list' %}?filter=this_month" type="button" class="btn btn-secondary {% if fltr == 'this_month' %}active{% endif %}">
+      <a href="{% url 'transaction_list_filter' %}?filter=this_month" type="button" class="btn btn-secondary {% if fltr == 'this_month' %}active{% endif %}">
         This month
       </a>
-      <a href="{% url 'transaction_list' %}?filter=last_month" type="button" class="btn btn-secondary {% if fltr == 'last_month' %}active{% endif %}">
+      <a href="{% url 'transaction_list_filter' %}?filter=last_month" type="button" class="btn btn-secondary {% if fltr == 'last_month' %}active{% endif %}">
         Last month
       </a>
-      <a href="{% url 'transaction_list' %}?filter=this_year" type="button" class="btn btn-secondary {% if fltr == 'this_year' %}active{% endif %}">
+      <a href="{% url 'transaction_list_filter' %}?filter=this_year" type="button" class="btn btn-secondary {% if fltr == 'this_year' %}active{% endif %}">
         This year
       </a>
-      <a href="{% url 'transaction_list' %}" type="button" class="btn btn-secondary {% if fltr ==  None %}active{% endif %}">
+      <a href="{% url 'transaction_list_filter' %}?filter=all_time" type="button" class="btn btn-secondary {% if fltr ==  'all_time' %}active{% endif %}">
         All time
       </a>
     </div>

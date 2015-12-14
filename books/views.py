@@ -48,6 +48,13 @@ def transaction_list(request):
 
 
 @login_required
+def transaction_list_filter(request):
+    fltr = request.GET.get('filter', None)
+    request.session['filter:transaction_list'] = fltr
+    return redirect(reverse('transaction_list'))
+
+
+@login_required
 def transaction_create(request):
     form = forms.TransactionForm(request.POST or None)
     if form.is_valid():

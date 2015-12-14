@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^create/$', views.transaction_create, name='transaction_create'),
     url(r'^update/(?P<id>\d+)/$', views.transaction_update,
         name='transaction_update'),
+    url(r'^filter/$', views.transaction_list_filter,
+        name='transaction_list_filter'),
 ]
