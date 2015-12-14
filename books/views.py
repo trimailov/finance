@@ -18,20 +18,20 @@ def transaction_list(request):
     user_id = request.user.id
     user = User.objects.get(id=user_id)
 
-    fltr = request.GET.get('filter', None)
-    if fltr:
-        if fltr == "this_month":
-            user_transactions = services.get_months_transactions(user)
-            ctx['fltr'] = fltr
-        elif fltr == "last_month":
-            user_transactions = services.get_last_months_transactions(user)
-            ctx['fltr'] = fltr
-        elif fltr == "this_year":
-            user_transactions = services.get_this_years_transactions(user)
-            ctx['fltr'] = fltr
-    else:
+    fltr = request.session.get('filter:transaction_list', None)
+    if fltr == "last_month":
+        user_transactions = services.get_last_months_transactions(user)
+        ctx['fltr'] = fltr
+    elif fltr == "this_year":
+        user_transactions = services.get_this_years_transactions(user)
+        ctx['fltr'] = fltr
+    elif fltr == "all_time":
         user_transactions = Transaction.objects.filter(user=user)
-        ctx['fltr'] = None
+        ctx['fltr'] = fltr
+    else:
+        # make 'this_month' filter default
+        user_transactions = services.get_months_transactions(user)
+        ctx['fltr'] = 'this_month'
 
     user_transactions = user_transactions.order_by('-created')
 
