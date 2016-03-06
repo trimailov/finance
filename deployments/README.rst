@@ -11,6 +11,7 @@ Vagrant deployment
 ------------------
 ::
 
+    cd deployments
     vagrant up
 
 To relaunch provisioning::
