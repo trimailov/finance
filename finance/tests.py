@@ -30,9 +30,9 @@ class PopulateTests(TestCase):
     def test_populate_command(self):
         call_command('populate')
         self.assertTrue(User.objects.get(username='admin'))
-        self.assertEqual(Transaction.objects.count(), 10)
+        self.assertEqual(Transaction.objects.count(), 20)
 
         # test if no error is raised if ran 2nd time
         call_command('populate')
         self.assertTrue(User.objects.get(username='admin'))
-        self.assertEqual(Transaction.objects.count(), 20)
+        self.assertEqual(Transaction.objects.count(), 40)
