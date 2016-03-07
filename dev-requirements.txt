@@ -5,16 +5,20 @@
 #    pip-compile dev-requirements.in
 #
 coverage==4.0.3
-decorator==4.0.4          # via ipython, traitlets
+decorator==4.0.9          # via ipython, traitlets
 django-debug-toolbar==1.4
-django==1.9               # via django-debug-toolbar
-ipdb==0.8.1
+django==1.9.4             # via django-debug-toolbar
+ipdb==0.9.0
 ipython-genutils==0.1.0   # via traitlets
-ipython==4.0.1            # via ipdb
+ipython==4.1.2            # via ipdb
 path.py==8.1.2            # via pickleshare
 pexpect==4.0.1            # via ipython
-pickleshare==0.5          # via ipython
-ptyprocess==0.5           # via pexpect
+pickleshare==0.6          # via ipython
+ptyprocess==0.5.1         # via pexpect
 simplegeneric==0.8.1      # via ipython
-sqlparse==0.1.18          # via django-debug-toolbar
-traitlets==4.0.0          # via ipython
+sqlparse==0.1.19          # via django-debug-toolbar
+traitlets==4.1.0          # via ipython
+
+# The following packages are commented out because they are
+# considered to be unsafe in a requirements file:
+# setuptools==20.2.2        # via ipdb, ipython
