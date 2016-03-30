@@ -8,7 +8,7 @@ Screenshot of how app looks in dev environment
 .. image:: docs/dev-screenshot.png
    :alt: dev env screenshot
 
-Most urgent TODOs
+TODOs
 -----------------
 
 - Editable user profile
@@ -16,6 +16,9 @@ Most urgent TODOs
   - custom currencies
 
 - Income/Expense graph
+
+- Probably need to undo django app approach, at least for now.
+  - I learned that refactoring into apps must be done only when you know what are main app domains in the whole project, not when the project is just starting.
 
 Development
 -----------
