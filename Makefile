@@ -7,7 +7,7 @@ env:
 
 .PHONY: pip-tools
 pip-tools:
-	env/bin/pip install pip-tools
+	env/bin/pip install -U pip-tools
 
 .PHONY: pip
 pip: update-pip
@@ -19,7 +19,7 @@ dev-pip: update-pip
 
 .PHONY: update-pip
 update-pip:
-	env/bin/pip install -U pip
+	env/bin/pip install -U pip==8.1.1
 
 .PHONY: pip-compile
 pip-compile:
