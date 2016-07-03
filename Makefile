@@ -10,12 +10,16 @@ pip-tools:
 	env/bin/pip install pip-tools
 
 .PHONY: pip
-pip:
+pip: update-pip
 	env/bin/pip-sync requirements.txt
 
 .PHONY: dev-pip
-dev-pip:
+dev-pip: update-pip
 	env/bin/pip-sync requirements.txt dev-requirements.txt
+
+.PHONY: update-pip
+update-pip:
+	env/bin/pip install -U pip
 
 .PHONY: pip-compile
 pip-compile:
