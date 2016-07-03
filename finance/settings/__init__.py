@@ -84,7 +84,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'extensions': ['pipeline.templatetags.ext.PipelineExtension']
+            'extensions': ['pipeline.jinja2.PipelineExtension']
         }
     }
 ]
@@ -138,40 +138,37 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.FileSystemFinder',
+    'pipeline.finders.AppDirectoriesFinder',
+    'pipeline.finders.CachedFileFinder',
     'pipeline.finders.PipelineFinder',
 )
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'finance/static/'),
 )
 
-# always turn on pipeline
-PIPELINE = True
-
-# set compressor for css
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
-PIPELINE_CSSMIN_BINARY = os.path.join(BASE_DIR, 'env/bin/cssmin')
-
-PIPELINE_JS_COMPRESSOR = None
-
-PIPELINE_COMPILERS = (
-  'pipeline.compilers.sass.SASSCompiler',
-)
-
-PIPELINE_SASS_BINARY = os.path.join(BASE_DIR, 'env/bin/sassc')
-
-# django-pipeline css settings
-PIPELINE_CSS = {
-    'finance': {
-        'source_filenames': (
-            'css/bootstrap.min.css',
-            'css/main.scss',
-        ),
-        'output_filename': 'css/finance.css',
-        'extra_context': {
-            'media': 'screen,projection,handheld',
+# django-pipeline settings
+PIPELINE = {
+    'STYLESHEETS': {
+        'finance': {
+            'source_filenames': (
+                'css/bootstrap.min.css',
+                'css/main.scss',
+            ),
+            'output_filename': 'css/finance.css',
+            'extra_context': {
+                'media': 'screen,projection,handheld',
+            },
         },
     },
+    'CSS_COMPRESSOR': 'pipeline.compressors.cssmin.CSSMinCompressor',
+    'CSSMIN_BINARY': os.path.join(BASE_DIR, 'env/bin/cssmin'),
+    'COMPILERS': ['pipeline.compilers.sass.SASSCompiler'],
+    'SASS_BINARY': os.path.join(BASE_DIR, 'env/bin/sassc'),
 }
+
+# set compressor for css
+PIPELINE['JS_COMPRESSOR'] = None
 
 # opbeat settings
 OPBEAT = secret.OPBEAT
