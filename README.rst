@@ -20,8 +20,6 @@ TODOs
 - Probably need to undo django app approach, at least for now.
   - I learned that refactoring into apps must be done only when you know what are main app domains in the whole project, not when the project is just starting.
 
-- Use py.test
-
 - Better build environment
   - Buildout?
 
