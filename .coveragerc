@@ -1,0 +1,8 @@
+[run]
+omit=
+    # ignore virtualenv
+    env/*
+    # ignore migrations
+    books/migrations/*
+    accounts/migrations/*
+    finance/migrations/*

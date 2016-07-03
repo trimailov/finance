@@ -44,13 +44,11 @@ tags:
 
 .PHONY: test
 test:
-	env/bin/python manage.py test --settings=finance.settings.testing
+	env/bin/py.test
 
 .PHONY: coverage
 coverage:
-	env/bin/coverage run --source=finance,accounts,books --omit=finance/wsgi.py,"*/migrations*" manage.py test --settings=finance.settings.testing
-	env/bin/coverage report
-	env/bin/coverage html
+	env/bin/py.test --cov --cov-report=html --cov-config=.coveragerc
 
 .PHONY: clean
 clean: clean_cache
