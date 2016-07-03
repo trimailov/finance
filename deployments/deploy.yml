@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  sudo: yes
+  become: yes
 
   vars:
     name: finance
@@ -36,6 +36,12 @@
     - nginx
     - uwsgi
 
+  # install acl, so we could become unprivileged user
+  # https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user
+  # http://stackoverflow.com/a/37096534
+  - name: install setfacl support
+    become: yes
+    apt: pkg=acl
 
   #create app user
   - name: create app user
@@ -49,13 +55,13 @@
 
   # PostgreSQL user and database
   - name: postgresql database
-    sudo_user: postgres
+    become_user: postgres
     postgresql_db: >
       name={{ name }}
       encoding=utf8
 
   - name: postgresql user
-    sudo_user: postgres
+    become_user: postgres
     postgresql_user: >
       name={{ name }}
       db={{ name }}
@@ -66,22 +72,22 @@
   - name: clone repository
     git: repo={{ repo }} dest={{ path }} version={{ git_ref }} force=yes
     notify: reload source code
-    sudo_user: "{{ name }}"
+    become_user: "{{ name }}"
 
   - name: copy secret settings
     template: src=../finance/settings/secret.py dest={{ path }}/finance/settings/secret.py
 
   - name: build project
     command: make chdir={{ path }}
-    sudo_user: "{{ name }}"
+    become_user: "{{ name }}"
 
   - name: migrate database
     command: env/bin/python manage.py migrate --noinput chdir={{ path }}
-    sudo_user: "{{ name }}"
+    become_user: "{{ name }}"
 
   - name: collectstatic
     command: env/bin/python manage.py collectstatic --noinput chdir={{ path }}
-    sudo_user: "{{ name }}"
+    become_user: "{{ name }}"
 
 
   # Set up uwsgi
