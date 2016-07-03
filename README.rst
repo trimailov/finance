@@ -20,6 +20,18 @@ TODOs
 - Probably need to undo django app approach, at least for now.
   - I learned that refactoring into apps must be done only when you know what are main app domains in the whole project, not when the project is just starting.
 
+- Use py.test
+
+- Better build environment
+  - Buildout?
+
+- Gave option to track debts and loans
+
+- clone transactions (e.g. lunch)
+
+- Do some statistics (maybe d3.js graphs?)
+  - how to categorize transactions?
+
 Development
 -----------
 
