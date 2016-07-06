@@ -37,7 +37,7 @@ To develop Vagrant box with Ubuntu is used. To set up::
 
    vagrant up && vagrant ssh
    cd /vagrant
-   make dev  # installs with dev dependancies, otherwise `make` is enough
+   make dev  # installs with dev dependencies, otherwise `make` is enough
    make migrate
    make run
 
