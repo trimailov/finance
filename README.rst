@@ -11,23 +11,19 @@ Screenshot of how app looks in dev environment
 TODOs
 -----------------
 
+- Gave option to track debts and loans
+
 - Editable user profile
   - Password reset feature
   - custom currencies
 
-- Income/Expense graph
-
-- Probably need to undo django app approach, at least for now.
-  - I learned that refactoring into apps must be done only when you know what are main app domains in the whole project, not when the project is just starting.
-
 - Better build environment
-  - Buildout?
-
-- Gave option to track debts and loans
+  - setuptools + Buildout?
 
 - clone transactions (e.g. lunch)
 
 - Do some statistics (maybe d3.js graphs?)
+  - Income/Expense graph
   - how to categorize transactions?
 
 Development
