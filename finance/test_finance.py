@@ -15,7 +15,7 @@ class HomePageTests(TestCase):
     def test_home_not_logged_in(self):
         c = Client()
         response = c.get(reverse('home'))
-        self.assertEqual(200, response.status_code)
+        self.assertRedirects(response, reverse('login'))
 
     def test_home_logged_in(self):
         c = Client()
