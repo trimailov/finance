@@ -12,3 +12,14 @@ class TransactionFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = models.Transaction
+
+
+class DebtLoanFactory(factory.DjangoModelFactory):
+    with_who = "ACME co."
+    title = factory.Sequence(lambda n: 'debt_loan_%d' % n)
+    amount = 42
+    category = models.DebtLoan.DEBT
+    user = factory.SubFactory(UserFactory)
+
+    class Meta:
+        model = models.DebtLoan
