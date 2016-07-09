@@ -1,10 +1,10 @@
 <div class="row list-type-select">
   <div class="col-sm-12 text-center">
     <div class="btn-group btn-group-sm" role="group" aria-label="Transaction filter by date">
-      <a href="{% url 'transaction_list' %}" type="button" class="btn btn-secondary">
+      <a href="{% url 'transaction_list' %}" type="button" class="btn btn-secondary {% if list == 'transactions' %}active{% endif %}">
         Transactions
       </a>
-      <a href="{% url 'debt_loan_list' %}" type="button" class="btn btn-secondary">
+      <a href="{% url 'debt_loan_list' %}" type="button" class="btn btn-secondary {% if list == 'debts_loans' %}active{% endif %}">
         Debts/Loans
       </a>
     </div>

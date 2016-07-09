@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 
+from books.models import DebtLoan
 from books.models import Transaction
 from books import forms
 from books import services
@@ -43,6 +44,8 @@ def transaction_list(request):
     ctx['positive_transaction_sum'] = user_transactions \
         .filter(category=Transaction.INCOME) \
         .aggregate(Sum('amount')).get('amount__sum')
+
+    ctx['list'] = 'transactions'
 
     return render(request, 'transaction_list.html', context=ctx)
 
@@ -94,6 +97,7 @@ def debt_loan_list(request):
         .filter(category=DebtLoan.LOAN) \
         .aggregate(Sum('amount')).get('amount__sum')
 
+    ctx['list'] = 'debts_loans'
 
     return render(request, 'debt_loan_list.html', context=ctx)
 
