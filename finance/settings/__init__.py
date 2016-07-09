@@ -152,6 +152,7 @@ PIPELINE = {
     'STYLESHEETS': {
         'finance': {
             'source_filenames': (
+                'font-awesome/css/font-awesome.min.css',
                 'css/bootstrap.min.css',
                 'css/main.scss',
             ),
