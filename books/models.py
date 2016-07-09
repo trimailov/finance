@@ -21,3 +21,26 @@ class Transaction(models.Model):
 
     def __str__(self):
         return "{}".format(self.title)
+
+
+class DebtLoan(models.Model):
+    DEBT = 0
+    LOAN = 1
+    CATEGORY_CHOICES = (
+        (DEBT, 'debt'),
+        (LOAN, 'loan'),
+    )
+
+    with_who = fields.CharField(max_length=255)
+    title = fields.CharField(max_length=255, null=True, blank=True)
+    amount = fields.DecimalField(max_digits=10, decimal_places=2)
+    category = fields.PositiveSmallIntegerField(choices=CATEGORY_CHOICES)
+    created = fields.DateTimeField(default=timezone.now, editable=False)
+    modified = fields.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(User)
+
+    def __str__(self):
+        if self.title:
+            return "{}: {}".format(self.with_who, self.title)
+        else:
+            return "{}".format(self.with_who)
