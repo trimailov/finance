@@ -6,11 +6,8 @@ from django.shortcuts import redirect
 
 def login(request, *args, **kwargs):
     if request.method == 'POST':
-        if request.POST.get('remember_me', None):
-            # set login session cookie for 1 year
-            request.session.set_expiry(3600*24*365)
-        else:
-            request.session.set_expiry(0)
+        # set login session cookie for 1 year
+        request.session.set_expiry(3600*24*365)
     return auth_views.login(request, *args, **kwargs)
 
 
