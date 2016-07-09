@@ -6,8 +6,9 @@ $white: #FFFFFF;
 $black: #000000;
 
 body {
+  max-width: 600px;
   min-width: 320px;
-  width: auto;
+  margin: auto;
 }
 
 .form-simple {
