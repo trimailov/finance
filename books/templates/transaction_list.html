@@ -6,11 +6,11 @@
     <a class="btn btn-primary" href="{% url 'transaction_create' %}">New entry</a>
   </div>
   <div class="col-xs-6 col-md-4 text-center">
-    <span class="octicon octicon-arrow-up label label-success">
-      € {{ positive_transaction_sum|default_if_none:'0.00' }}
+    <span class="label label-success">
+      <i class="fa fa-arrow-up"></i> € {{ positive_transaction_sum|default_if_none:'0.00' }}
     </span>
-    <span class="octicon octicon-arrow-down label label-danger">
-      € {{ negative_transaction_sum|default_if_none:'0.00' }}
+    <span class="label label-danger">
+      <i class="fa fa-arrow-down"></i> € {{ negative_transaction_sum|default_if_none:'0.00' }}
     </span>
   </div>
 </div>
@@ -50,7 +50,7 @@
     {% endif %}
     </td>
     <td>
-      <a href="{% url 'transaction_update' transaction.id %}"><span class="octicon octicon-pencil"></span></a>
+      <a href="{% url 'transaction_update' transaction.id %}"><i class="fa fa-edit"></i></a>
     </td>
   </tr>
   {% endfor %}
