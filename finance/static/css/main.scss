@@ -19,6 +19,21 @@ body {
   margin-top: 15px;
 }
 
+.time-filter {
+  margin-top: 15px;
+}
+
+.transaction-list table td {
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 370px) {
+  div.time-filter div.btn-group a {
+    font-size: 10px;
+  }
+}
+
 // for django debug toolbar
 // https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
 [hidden][style="display: block;"] {
