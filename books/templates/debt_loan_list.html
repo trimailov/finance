@@ -1,0 +1,45 @@
+{% extends "logged_in_base.html" %}
+
+{% block logged_in_content %}
+
+<div class="row">
+  <div class="col-xs-6 col-md-8">
+    <a class="btn btn-primary" href="{% url 'debt_loan_create' %}">New entry</a>
+  </div>
+  <div class="col-xs-6 col-md-4 text-center">
+    <span class="label label-success">
+      <i class="fa fa-arrow-up"></i> € {{ loan_sum|default_if_none:'0.00' }}
+    </span>
+    <span class="label label-danger">
+      <i class="fa fa-arrow-down"></i> € {{ debt_sum|default_if_none:'0.00' }}
+    </span>
+  </div>
+</div>
+
+{% include "list_selector.html" %}
+
+<div class="table-responsive list debt-loan-list">
+<table class="table">
+  <tbody>
+  {% for debt_loan in debt_loans %}
+  <tr>
+    <td>
+      {{ debt_loan }}
+    </td>
+    <td>
+    {% if debt_loan.category == debt_loan.LOAN %}
+      <span class="text-success">€ {{ debt_loan.amount }}</span>
+    {% else %}
+      <span class="text-danger">€ {{ debt_loan.amount }}</span>
+    {% endif %}
+    </td>
+    <td width="36px">
+      <a href="{% url 'debt_loan_update' debt_loan.id %}"><i class="fa fa-edit"></i></a>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

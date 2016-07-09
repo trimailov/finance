@@ -4,10 +4,16 @@ from books import views
 
 
 urlpatterns = [
-    url(r'^$', views.transaction_list, name='transaction_list'),
+    url(r'^transactions/$', views.transaction_list, name='transaction_list'),
     url(r'^create/$', views.transaction_create, name='transaction_create'),
     url(r'^update/(?P<id>\d+)/$', views.transaction_update,
         name='transaction_update'),
     url(r'^filter/$', views.transaction_list_filter,
         name='transaction_list_filter'),
+
+    url(r'^debts-loans/$', views.debt_loan_list, name='debt_loan_list'),
+    url(r'^debts-loans/create/$', views.debt_loan_create,
+        name='debt_loan_create'),
+    url(r'^debts-loans/update/(?P<id>\d+)/$', views.debt_loan_update,
+        name='debt_loan_update'),
 ]

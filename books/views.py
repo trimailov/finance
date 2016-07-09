@@ -72,3 +72,47 @@ def transaction_update(request, id):
         form.save()
         return redirect(reverse('transaction_list'))
     return render(request, 'transaction_create.html', {'form': form})
+
+
+@login_required
+def debt_loan_list(request):
+    ctx = {}
+
+    user_id = request.user.id
+    user = User.objects.get(id=user_id)
+
+    user_debt_loans = DebtLoan.objects.filter(user=user)
+
+    user_debt_loans = user_debt_loans.order_by('-created')
+
+    ctx['user'] = user
+    ctx['debt_loans'] = user_debt_loans
+    ctx['debt_sum'] = user_debt_loans \
+        .filter(category=DebtLoan.DEBT) \
+        .aggregate(Sum('amount')).get('amount__sum')
+    ctx['loan_sum'] = user_debt_loans \
+        .filter(category=DebtLoan.LOAN) \
+        .aggregate(Sum('amount')).get('amount__sum')
+
+
+    return render(request, 'debt_loan_list.html', context=ctx)
+
+
+@login_required
+def debt_loan_create(request):
+    form = forms.DebtLoanForm(request.POST or None)
+    if form.is_valid():
+        form.instance.user = request.user
+        form.save()
+        return redirect(reverse('debt_loan_list'))
+    return render(request, 'debt_loan_create.html', {'form': form})
+
+
+@login_required
+def debt_loan_update(request, id):
+    instance = get_object_or_404(DebtLoan, id=id)
+    form = forms.DebtLoanForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('debt_loan_list'))
+    return render(request, 'debt_loan_create.html', {'form': form})
