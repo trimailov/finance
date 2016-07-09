@@ -2,6 +2,7 @@ $light-blue: #6F99AA;
 $dark-blue: #03295C;
 $yellow: #FDB73C;
 $grey: #A9B2B8;
+$dark-grey: #838C93;
 $white: #FFFFFF;
 $black: #000000;
 
@@ -27,6 +28,12 @@ body {
 .transaction-list table td {
   padding: 5px 10px;
   vertical-align: middle;
+}
+
+.month-change-row td {
+  text-align: center;
+  border-top: 1px solid $dark-grey;
+  border-bottom: 1px solid $dark-grey;
 }
 
 @media screen and (max-width: 370px) {

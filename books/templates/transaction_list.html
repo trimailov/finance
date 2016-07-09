@@ -35,9 +35,17 @@
 </div>
 
 <div class="table-responsive transaction-list">
-<table class="table table-striped">
+<table class="table">
   <tbody>
   {% for transaction in transactions %}
+  {% ifchanged transaction.created.month %}
+  <tr class="month-change-row">
+    <td colspan="3">
+      <strong>{{ transaction.created|date:"F" }}</strong>
+      {{ transaction.created|date:"'y" }}
+    </td>
+  </td>
+  {% endifchanged %}
   <tr>
     <td>
       {{ transaction.title }}
