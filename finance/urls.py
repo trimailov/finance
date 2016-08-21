@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
@@ -21,7 +21,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += patterns(
-        '',
+    urlpatterns.append(
         url(r'^__debug__/', include(debug_toolbar.urls)),
     )
