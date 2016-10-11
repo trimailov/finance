@@ -11,8 +11,6 @@ Screenshot of how app looks in dev environment
 TODOs
 -----------------
 
-- Gave option to track debts and loans
-
 - Editable user profile
   - Password reset feature
   - custom currencies
