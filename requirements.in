@@ -1,5 +1,3 @@
-argon2_cffi
-cffi
 cssmin
 Django
 django-pipeline
