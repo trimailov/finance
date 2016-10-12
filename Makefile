@@ -53,7 +53,7 @@ coverage:
 
 .PHONY: clean
 clean: clean_cache
-	rm -rf env tags tmp var
+	rm -rf env tags tmp var htmlcov
 
 .PHONY: static
 static:
