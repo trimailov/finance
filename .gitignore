@@ -129,3 +129,4 @@ Tags
 
 # ignore secret settings
 finance/settings/secret.py
+deployments/deploy.retry
