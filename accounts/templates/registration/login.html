@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load render_field from widget_tweaks %}
+{% load i18n %}
 
 {% block content %}
 <form class="form-simple form-login" method="post">
@@ -15,7 +16,8 @@
   </fieldset>
   {% endfor %}
 
-  <button class="btn btn-primary btn-block" type="submit">Log in</button>
-  <a class="btn btn-secondary btn-block" href="{% url 'registration_register' %}">Sign up</a>
+  <button class="btn btn-primary btn-block" type="submit">{% trans "Log in" %}</button>
+  <a class="btn btn-secondary btn-block" href="{% url 'registration_register' %}">{% trans "Sign up" %}</a>
+  <a class="btn btn-secondar btn-block" href="{% url "password_reset" %}">{% trans "Forgot password?" %}</a>
 </form>
 {% endblock %}
