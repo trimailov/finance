@@ -52,7 +52,7 @@ coverage:
 
 .PHONY: clean
 clean: clean_cache
-	rm -rf env tags
+	rm -rf env tags tmp var
 
 .PHONY: static
 static:
