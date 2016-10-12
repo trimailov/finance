@@ -19,6 +19,7 @@ dev-pip: update-pip
 
 .PHONY: update-pip
 update-pip:
+	env/bin/pip install -U setuptools
 	env/bin/pip install -U pip==8.1.1
 
 .PHONY: pip-compile
