@@ -13,12 +13,13 @@ TODOs
 
 - Editable user profile
   - Password reset feature
+  - User settings to edit username, email, change password..
   - custom currencies
 
 - Better build environment
   - setuptools + Buildout?
 
-- clone transactions (e.g. lunch)
+- Clone transactions (e.g. lunch)
 
 - Do some statistics (maybe d3.js graphs?)
   - Income/Expense graph
