@@ -153,6 +153,7 @@ PIPELINE = {
         'finance': {
             'source_filenames': (
                 'font-awesome/css/font-awesome.min.css',
+                'css/bootstrap.min.css',
                 'css/main.scss',
             ),
             'output_filename': 'css/finance.css',
