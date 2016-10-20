@@ -186,12 +186,15 @@ ADMINS = (
     ('admin', 'j.trimailovas@gmail.com'),
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'postmark.django_backend.EmailBackend'
 
-SERVER_EMAIL = 'finantious@gmail.com'
+SERVER_EMAIL = 'finantious@finantious.com'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'finantious@gmail.com'
+EMAIL_HOST = 'smtp.fastmail.com'
+EMAIL_HOST_USER = 'finantious@finantious.com'
 EMAIL_HOST_PASSWORD = secret.EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+POSTMARK_API_KEY = secret.POSTMARK_API_KEY
+POSTMARK_SENDER = 'finantious@finantious.com'

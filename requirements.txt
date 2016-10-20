@@ -17,6 +17,7 @@ MarkupSafe==0.23          # via jinja2
 opbeat==3.3.4
 psycopg2==2.6.2
 python-dateutil==2.5.3    # via fake-factory
+python-postmark==0.4.10
 pytz==2016.6.1
 six==1.10.0               # via fake-factory, libsass, python-dateutil
 uwsgi==2.0.13.1
