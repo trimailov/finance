@@ -16,5 +16,15 @@
     {% block content %}
     {% endblock %}
     </div>
+
+    <script>
+      $(".collapse-btn").click(function(){
+        $("#"+this.dataset.toggle).show();
+      });
+      $(".recollapse-btn").click(function(){
+        $("#"+this.dataset.toggle).hide();
+      });
+    </script>
+
   </body>
 </html>

@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block create_new_btn %}
-    <a class="btn btn-primary" href="{% url 'debt_loan_create' %}">New entry</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'debt_loan_create' %}">New entry</a>
 {% endblock %}
 
 {% block logged_in_content %}
@@ -35,7 +35,17 @@
     <td width="36px">
       <a href="{% url 'debt_loan_update' debt_loan.id %}"><i class="fa fa-edit"></i></a>
     </td>
+    <td width="36px">
+      <a class="collapse-btn" data-toggle="collapse-{{debt_loan.pk}}"><i class="fa fa-trash"></i></a>
+    </td>
   </tr>
+  <tr id="collapse-{{ debt_loan.pk }}" class="collapsable">
+    <td colspan="3">
+      <a href="{% url 'debt_loan_delete' debt_loan.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+    <td>
+      <a class="recollapse-btn" data-toggle="collapse-{{debt_loan.pk}}"><i class="fa fa-chevron-up"></i></a>
+    </td>
   {% endfor %}
   </tbody>
 </table>

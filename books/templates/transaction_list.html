@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block create_new_btn %}
-    <a class="btn btn-primary" href="{% url 'transaction_create' %}">New entry</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'transaction_create' %}">New entry</a>
 {% endblock %}
 
 {% block logged_in_content %}
@@ -42,7 +42,7 @@
   {% for transaction in transactions %}
   {% ifchanged transaction.created.month %}
   <tr class="month-change-row">
-    <td colspan="3">
+    <td colspan="4">
       <strong>{{ transaction.created|date:"F" }}</strong>
       {{ transaction.created|date:"'y" }}
     </td>
@@ -61,6 +61,17 @@
     </td>
     <td width="36px">
       <a href="{% url 'transaction_update' transaction.id %}"><i class="fa fa-edit"></i></a>
+    </td>
+    <td width="36px">
+      <a class="collapse-btn" data-toggle="collapse-{{transaction.pk}}"><i class="fa fa-trash"></i></a>
+    </td>
+  </tr>
+  <tr id="collapse-{{ transaction.pk }}" class="collapsable">
+    <td colspan="3">
+      <a href="{% url 'transaction_delete' transaction.pk %}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+    <td>
+      <a class="recollapse-btn" data-toggle="collapse-{{transaction.pk}}"><i class="fa fa-chevron-up"></i></a>
     </td>
   </tr>
   {% endfor %}

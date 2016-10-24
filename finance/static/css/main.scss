@@ -10,6 +10,7 @@ body {
   max-width: 600px;
   min-width: 320px;
   margin: auto;
+  margin-top: 5px;
 }
 
 .form-simple {
@@ -48,6 +49,10 @@ body {
 
 .center {
   text-align: center;
+}
+
+.collapsable {
+  display: none;
 }
 
 @media screen and (max-width: 370px) {
