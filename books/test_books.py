@@ -122,7 +122,14 @@ class TransactionFilterTests(TestCase):
             user=self.user,
         )
 
-    def test_months_transactions(self):
+        self.last_year = TransactionFactory(
+            title='this_year',
+            created=datetime(2014, 1, 23, tzinfo=pytz.utc),
+            user=self.user,
+        )
+
+
+    def test_this_months_transactions(self):
         with mock.patch('books.services.timezone') as mock_now:
             mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
 
@@ -133,7 +140,21 @@ class TransactionFilterTests(TestCase):
             self.assertEqual(len(transactions), 1)
             self.assertEqual(transactions[0].title, 'this_month')
 
-    def test_last_transactions(self):
+    def test_this_months_transactions_list(self):
+        with mock.patch('books.services.timezone') as mock_now:
+            mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
+
+            c = Client()
+            logged_in = c.login(username=self.user.username, password='secret')
+            self.assertTrue(logged_in)
+
+            response = c.get(reverse('transaction_list'))
+            self.assertEqual(200, response.status_code)
+
+            qs = response.context['transactions']
+            self.assertSequenceEqual(qs, [self.this_month])
+
+    def test_last_months_transactions(self):
         with mock.patch('books.services.timezone') as mock_now:
             mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
 
@@ -144,6 +165,22 @@ class TransactionFilterTests(TestCase):
             self.assertEqual(len(transactions), 2)
             self.assertEqual(transactions[0].title, 'this_month')
             self.assertEqual(transactions[1].title, 'last_month')
+
+    def test_last_months_transactions_list(self):
+        with mock.patch('books.services.timezone') as mock_now:
+            mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
+
+            c = Client()
+            logged_in = c.login(username=self.user.username, password='secret')
+            self.assertTrue(logged_in)
+
+            response = c.get(reverse('transaction_list_filter'),
+                             {'filter': 'last_month'},
+                             follow=True)
+            self.assertRedirects(response, reverse('transaction_list'))
+
+            qs = response.context['transactions']
+            self.assertSequenceEqual(qs, [self.this_month, self.last_month])
 
     def test_this_years_transactions(self):
         with mock.patch('books.services.timezone') as mock_now:
@@ -157,6 +194,44 @@ class TransactionFilterTests(TestCase):
             self.assertEqual(transactions[0].title, 'this_month')
             self.assertEqual(transactions[1].title, 'last_month')
             self.assertEqual(transactions[2].title, 'this_year')
+
+    def test_this_years_transactions_list(self):
+        with mock.patch('books.services.timezone') as mock_now:
+            mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
+
+            c = Client()
+            logged_in = c.login(username=self.user.username, password='secret')
+            self.assertTrue(logged_in)
+
+            response = c.get(reverse('transaction_list_filter'),
+                             {'filter': 'this_year'},
+                             follow=True)
+            self.assertRedirects(response, reverse('transaction_list'))
+
+            qs = response.context['transactions']
+            self.assertSequenceEqual(
+                qs,
+                [self.this_month, self.last_month, self.this_year]
+            )
+
+    def test_all_time_transactions_list(self):
+        with mock.patch('books.services.timezone') as mock_now:
+            mock_now.now.return_value = datetime(2015, 4, 23, tzinfo=pytz.utc)
+
+            c = Client()
+            logged_in = c.login(username=self.user.username, password='secret')
+            self.assertTrue(logged_in)
+
+            response = c.get(reverse('transaction_list_filter'),
+                             {'filter': 'all_time'},
+                             follow=True)
+            self.assertRedirects(response, reverse('transaction_list'))
+
+            qs = response.context['transactions']
+            self.assertSequenceEqual(
+                qs,
+                [self.this_month, self.last_month, self.this_year, self.last_year]
+            )
 
 
 class DebtLoanTests(TestCase):
