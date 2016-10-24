@@ -68,8 +68,14 @@ def transaction_create(request):
 
 
 @login_required
-def transaction_update(request, id):
-    instance = get_object_or_404(Transaction, id=id)
+def transaction_delete(request, pk):
+    Transaction.objects.get(pk=pk).deactivate()
+    return redirect(reverse('transaction_list'))
+
+
+@login_required
+def transaction_update(request, pk):
+    instance = get_object_or_404(Transaction, pk=pk)
     form = forms.TransactionForm(request.POST or None, instance=instance)
     if form.is_valid():
         form.save()
@@ -84,7 +90,7 @@ def debt_loan_list(request):
     user_id = request.user.id
     user = User.objects.get(id=user_id)
 
-    user_debt_loans = DebtLoan.objects.filter(user=user)
+    user_debt_loans = DebtLoan.objects.filter(user=user, active=True)
 
     user_debt_loans = user_debt_loans.order_by('-created')
 
@@ -113,8 +119,14 @@ def debt_loan_create(request):
 
 
 @login_required
-def debt_loan_update(request, id):
-    instance = get_object_or_404(DebtLoan, id=id)
+def debt_loan_delete(request, pk):
+    DebtLoan.objects.get(pk=pk).deactivate()
+    return redirect(reverse('debt_loan_list'))
+
+
+@login_required
+def debt_loan_update(request, pk):
+    instance = get_object_or_404(DebtLoan, pk=pk)
     form = forms.DebtLoanForm(request.POST or None, instance=instance)
     if form.is_valid():
         form.save()
