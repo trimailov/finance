@@ -82,6 +82,23 @@ class TransactionTests(TestCase):
         self.assertEqual('forty-two', Transaction.objects.latest('id').title)
         self.assertEqual(42, Transaction.objects.latest('id').amount)
 
+    def test_transaction_delete(self):
+        c = Client()
+        logged_in = c.login(username=self.user.username, password='secret')
+        self.assertTrue(logged_in)
+
+        t = TransactionFactory(title='first',
+                               amount=1,
+                               category=Transaction.EXPENSE)
+        self.assertEqual(1, Transaction.objects.count())
+        self.assertTrue(Transaction.objects.all()[0].active)
+
+        response = c.get(reverse('transaction_delete', args=[t.id]))
+        self.assertRedirects(response, reverse('transaction_list'))
+
+        self.assertEqual(1, Transaction.objects.count())
+        self.assertFalse(Transaction.objects.all()[0].active)
+
 
 class TransactionFilterTests(TestCase):
     def setUp(self):
@@ -214,3 +231,20 @@ class DebtLoanTests(TestCase):
         self.assertEqual(1, DebtLoan.objects.count())
         self.assertEqual('forty-two', DebtLoan.objects.latest('id').title)
         self.assertEqual(42, DebtLoan.objects.latest('id').amount)
+
+    def test_debt_loan_delete(self):
+        c = Client()
+        logged_in = c.login(username=self.user.username, password='secret')
+        self.assertTrue(logged_in)
+
+        t = DebtLoanFactory(title='first',
+                            amount=1,
+                            category=DebtLoan.LOAN)
+        self.assertEqual(1, DebtLoan.objects.count())
+        self.assertTrue(DebtLoan.objects.all()[0].active)
+
+        response = c.get(reverse('debt_loan_delete', args=[t.id]))
+        self.assertRedirects(response, reverse('debt_loan_list'))
+
+        self.assertEqual(1, DebtLoan.objects.count())
+        self.assertFalse(DebtLoan.objects.all()[0].active)
