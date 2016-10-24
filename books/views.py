@@ -27,7 +27,7 @@ def transaction_list(request):
         user_transactions = services.get_this_years_transactions(user)
         ctx['fltr'] = fltr
     elif fltr == "all_time":
-        user_transactions = Transaction.objects.filter(user=user)
+        user_transactions = Transaction.objects.filter(user=user, active=True)
         ctx['fltr'] = fltr
     else:
         # make 'this_month' filter default
