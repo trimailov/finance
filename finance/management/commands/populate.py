@@ -11,7 +11,9 @@ import factory
 import pytz
 
 from accounts.factories import UserFactory
+from books.factories import DebtLoanFactory
 from books.factories import TransactionFactory
+from books.models import DebtLoan
 from books.models import Transaction
 
 
@@ -26,6 +28,7 @@ class Command(BaseCommand):
             print("admin user already exists")
 
         self.create_transactions()
+        self.create_debt_loans()
 
     def create_admin(self):
         # Factory creates simple user, so ``is_staff`` is set later
@@ -99,3 +102,42 @@ class Command(BaseCommand):
             created=factory.Sequence(lambda n: self._get_all_time()),
         )
         print("Transactions for admin created")
+
+    def create_debt_loans(self):
+        categories = [DebtLoan.DEBT, DebtLoan.LOAN]
+
+        # create now
+        DebtLoanFactory.create_batch(
+            5,
+            amount=factory.Sequence(lambda n: random.randint(1, 10)),
+            category=factory.Sequence(lambda n: random.choice(categories)),
+            user=self.admin,
+        )
+
+        # create for last month
+        DebtLoanFactory.create_batch(
+            5,
+            amount=factory.Sequence(lambda n: random.randint(1, 10)),
+            category=factory.Sequence(lambda n: random.choice(categories)),
+            user=self.admin,
+            created=factory.Sequence(lambda n: self._get_last_month()),
+        )
+
+        # create for this year
+        DebtLoanFactory.create_batch(
+            5,
+            amount=factory.Sequence(lambda n: random.randint(1, 10)),
+            category=factory.Sequence(lambda n: random.choice(categories)),
+            user=self.admin,
+            created=factory.Sequence(lambda n: self._get_this_year()),
+        )
+
+        # create for all time
+        DebtLoanFactory.create_batch(
+            5,
+            amount=factory.Sequence(lambda n: random.randint(1, 10)),
+            category=factory.Sequence(lambda n: random.choice(categories)),
+            user=self.admin,
+            created=factory.Sequence(lambda n: self._get_all_time()),
+        )
+        print("DebtLoans for admin created")
