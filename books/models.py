@@ -17,10 +17,16 @@ class Transaction(models.Model):
     category = fields.CharField(max_length=3, choices=CATEGORY_CHOICES)
     created = fields.DateTimeField(default=timezone.now, editable=False)
     modified = fields.DateTimeField(default=timezone.now)
+    active = fields.BooleanField(default=True)
     user = models.ForeignKey(User)
 
     def __str__(self):
         return "{}".format(self.title)
+
+    def deactivate(self):
+        if self.active:
+            self.active = False
+            self.save()
 
 
 class DebtLoan(models.Model):
@@ -37,6 +43,7 @@ class DebtLoan(models.Model):
     category = fields.PositiveSmallIntegerField(choices=CATEGORY_CHOICES)
     created = fields.DateTimeField(default=timezone.now, editable=False)
     modified = fields.DateTimeField(default=timezone.now)
+    active = fields.BooleanField(default=True)
     user = models.ForeignKey(User)
 
     def __str__(self):
@@ -44,3 +51,8 @@ class DebtLoan(models.Model):
             return "{}: {}".format(self.with_who, self.title)
         else:
             return "{}".format(self.with_who)
+
+    def deactivate(self):
+        if self.active:
+            self.active = False
+            self.save()
