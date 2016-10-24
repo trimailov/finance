@@ -14,8 +14,13 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-6 text-right">
-    <a class="btn" href={% url "logout" %}?next={% url "home" %}>Logout</a>
+  <div class="col-xs-4 center">
+    {% block sums %}
+    {% endblock %}
+  </div>
+  <div class="col-xs-4 right">
+    {% block create_new_btn %}
+    {% endblock %}
   </div>
 </div>
 {% endblock %}

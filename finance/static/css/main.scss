@@ -34,6 +34,22 @@ body {
   border-bottom: 1px solid $dark-grey;
 }
 
+#user-dropdown {
+  .dropdown-item,
+  .dropdown-toggle {
+    padding: 3px 8px;
+    min-width: 100px;
+  }
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
 @media screen and (max-width: 370px) {
   div.time-filter div.btn-group a {
     font-size: 10px;
