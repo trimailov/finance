@@ -36,9 +36,18 @@ body {
 }
 
 #user-dropdown {
+  .dropdown-menu {
+    padding: 3px 1px;
+  }
+
+  .dropdown-divider {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
   .dropdown-item,
   .dropdown-toggle {
-    padding: 3px 8px;
+    padding: 3px 15px;
     min-width: 100px;
   }
 }
