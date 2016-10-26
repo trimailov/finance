@@ -12,7 +12,6 @@ TODOs
 -----------------
 
 - Editable user profile
-  - Password reset feature
   - User settings to edit username, email, change password..
   - custom currencies
 
