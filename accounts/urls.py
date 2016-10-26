@@ -14,6 +14,9 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^login_redirect/$', views.login_redirect, name='login_redirect'),
 
+    url(r'^settings/(?P<pk>\d+)/$', views.user_settings,
+        name='user_settings'),
+
     # password reset
     url(r'^password-reset/$',
         password_reset,

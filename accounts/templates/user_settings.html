@@ -1,0 +1,20 @@
+{% extends "logged_in_base.html" %}
+
+{% load render_field from widget_tweaks %}
+
+{% block logged_in_content %}
+<form class="form-simple form-transaction-create" method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  {% for field in form %}
+  <fieldset class="form-group">
+    {{ field.label_tag }}
+    <span class="text-danger">{{ field.errors }}</span>
+    {% render_field field class="form-control" %}
+  </fieldset>
+  {% endfor %}
+
+  <button class="btn btn-primary btn-block" type="submit">Submit</button>
+</form>
+{% endblock %}
