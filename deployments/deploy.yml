@@ -147,7 +147,9 @@
 
 
   - name: reload source code
-    command: touch --no-create {{ path }}/{{ name }}/wsgi.py
+    file:
+      path: {{ path }}/{{ name }}/wsgi.py
+      state: touch
 
   - name: reload nginx
     service: name=nginx state=reloaded
