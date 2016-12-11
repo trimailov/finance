@@ -155,7 +155,7 @@
 
   - name: reload source code
     file:
-      path: {{ path }}/{{ name }}/wsgi.py
+      path: "{{ path }}/{{ name }}/wsgi.py"
       state: touch
 
   - name: reload nginx
