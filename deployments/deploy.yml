@@ -60,7 +60,7 @@
 
   - name: create .well-known/acme-challenge/ dir
     file:
-      path: {{ path }}/.well-known/acme-challenge
+      path: "{{ path }}/.well-known/acme-challenge"
       state: directory
     become_user: "{{ name }}"
 
