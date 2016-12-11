@@ -44,6 +44,7 @@
     apt: pkg=acl
 
 
+  # setup letsencrypt stuff
   - name: download certbot-auto
     get_url: 
       url: https://dl.eff.org/certbot-auto 
@@ -56,6 +57,12 @@
       mode: a+x 
       path: /usr/local/sbin/certbot-auto
     become_user: root
+
+  - name: create .well-known/acme-challenge/ dir
+    file:
+      path: {{ path }}/.well-known/acme-challenge
+      state: directory
+    become_user: "{{ name }}"
 
 
   #create app user
