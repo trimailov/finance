@@ -146,7 +146,7 @@
 
   # Set up nginx
   - name: set up nginx for the app
-    template: src=templates/nginx.conf dest=/etc/nginx/sites-available/{{ name }}.conf
+    template: src=templates/nginx_{{ deploy_target }}.conf dest=/etc/nginx/sites-available/{{ name }}.conf
     notify: reload nginx
 
   - name: link nginx config

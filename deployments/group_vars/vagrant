@@ -2,3 +2,4 @@
 server_name: localhost
 allowed_hosts: localhost
 branch_name: master
+deploy_target: vagrant
