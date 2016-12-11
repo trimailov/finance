@@ -64,6 +64,21 @@
       state: directory
     become_user: "{{ name }}"
 
+  - name: renew letsencrypt certificate every monday at 2:30 am
+    cron:
+      minute: "30"
+      hour: "2"
+      weekday: "1"
+      job: "/usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log"
+
+
+  - name: reload nginx after certificate renewal every monday at 2:35 am
+    cron:
+      minute: "35"
+      hour: "2"
+      weekday: "1"
+      job: "/etc/init.d/nginx reload"
+
 
   #create app user
   - name: create app user
