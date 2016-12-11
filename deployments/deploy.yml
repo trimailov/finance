@@ -43,6 +43,21 @@
     become: yes
     apt: pkg=acl
 
+
+  - name: download certbot-auto
+    get_url: 
+      url: https://dl.eff.org/certbot-auto 
+      dest: /usr/local/sbin
+    become_user: root
+
+
+  - name: make certbot-auto an executable
+    file: 
+      mode: a+x 
+      path: /usr/local/sbin/certbot-auto
+    become_user: root
+
+
   #create app user
   - name: create app user
     user: name={{ name }} system=yes group=www-data home={{ home }}
