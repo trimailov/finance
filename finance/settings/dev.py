@@ -7,7 +7,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # we want to have debug toolbar in dev but not in prod
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

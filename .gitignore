@@ -131,3 +131,7 @@ Tags
 finance/settings/secret.py
 deployments/deploy.retry
 *.afdesign
+
+
+### Misc ###
+bin

@@ -14,6 +14,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^accounts/', include(accounts_urls)),
     url(r'^books/', include(books_urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

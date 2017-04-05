@@ -18,7 +18,7 @@ class Transaction(models.Model):
     created = fields.DateTimeField(default=timezone.now, editable=False)
     modified = fields.DateTimeField(default=timezone.now)
     active = fields.BooleanField(default=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{}".format(self.title)
@@ -44,7 +44,7 @@ class DebtLoan(models.Model):
     created = fields.DateTimeField(default=timezone.now, editable=False)
     modified = fields.DateTimeField(default=timezone.now)
     active = fields.BooleanField(default=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         if self.title:
