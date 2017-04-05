@@ -30,7 +30,7 @@ SECRET_KEY = secret.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '188.166.117.76',
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '188.166.117.76',
                  'finantious.com', 'www.finantious.com']
 
 
