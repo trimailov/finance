@@ -1,35 +1,49 @@
-all: env pip-tools pip
-dev: env pip-tools dev-pip
+ENV = env
+BIN = $(ENV)/bin
+PIP = $(BIN)/pip
+PIP_COMPILE = $(BIN)/pip-compile
+PIP_SYNC = $(BIN)/pip-sync
+SIGNSPACE = $(BIN)/signspace
+PYTEST = $(BIN)/pytest
+DONEFILE = $(ENV)/.done
+TESTDIR = test
 
 .PHONY: env
-env:
-	pyvenv-3.5 env
+env: $(DONEFILE) bin
 
-.PHONY: pip-tools
-pip-tools:
-	env/bin/pip install -U pip-tools
-
-.PHONY: pip
-pip: update-pip
-	env/bin/pip-sync requirements.txt
-
-.PHONY: dev-pip
-dev-pip: update-pip
-	env/bin/pip-sync requirements.txt dev-requirements.txt
-
-.PHONY: update-pip
-update-pip:
-	env/bin/pip install -U setuptools
-	env/bin/pip install -U pip==8.1.1
-
-.PHONY: pip-compile
-pip-compile:
-	env/bin/pip-compile requirements.in
-	env/bin/pip-compile dev-requirements.in
+.PHONY: help
+help:
+	@echo "make              # install dev environment"
+	@echo "make tags         # build ctags for server and client"
+	@echo "make run          # run the backend dev server"
+	@echo "make test         # run tests"
+	@echo "make static       # runs collectstatic"
+	@echo "make clean        # removes everything created by make"
+	@echo "make clean_cache  # removes python's __pycache__ dirs"
 
 .PHONY: run
-run:
-	env/bin/python manage.py runserver 0.0.0.0:8080 --settings=finance.settings.dev
+run: env
+	env/bin/python -Wall manage.py runserver 0.0.0.0:8080 --settings=finance.settings.dev
+
+$(PIP):
+	pyvenv-3.5 $(ENV)
+
+$(PIP_COMPILE) $(PIP_SYNC): $(PIP)
+	$(PIP) install pip-tools
+
+$(DONEFILE): $(PIP) $(PIP_SYNC) requirements.txt requirements-dev.txt
+	$(PIP_SYNC) requirements-dev.txt
+	touch $@
+
+requirements.txt: requirements/prod.in
+	$(PIP_COMPILE) requirements/prod.in -o requirements.txt
+
+requirements-dev.txt: requirements/prod.in requirements/dev.in
+	$(PIP_COMPILE) requirements/prod.in requirements/dev.in -o requirements-dev.txt
+
+# Convenience shortcut
+bin: $(BIN)
+	ln -sf $(BIN) bin
 
 .PHONY: migrate
 migrate:
@@ -45,7 +59,7 @@ tags:
 
 .PHONY: test
 test:
-	env/bin/py.test
+	$(PYTEST)
 
 .PHONY: coverage
 coverage:
