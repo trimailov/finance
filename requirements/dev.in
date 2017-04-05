@@ -1,0 +1,6 @@
+coverage
+django-debug-toolbar
+ipdb
+pytest
+pytest-cov
+pytest-django
